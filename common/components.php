@@ -91,7 +91,7 @@ function footer()
 {
   include("website_info.php");
   echo ' <footer class="footer mt-auto">
-<div class="container py-4">
+<div class="container ">
   <div class="col-md-6 brand">
     <a href="index.php" class="mx-auto">';
   echo $website_name;

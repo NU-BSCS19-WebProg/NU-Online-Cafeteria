@@ -227,6 +227,7 @@ footer {
   width: 100%;
   background-color: var(--main-blue);
   color: #fff;
+  padding-top: 5rem;
 }
 
 footer .brand a {
@@ -237,6 +238,7 @@ footer .brand a {
 }
 
 footer .names {
+margin-top: 5rem;
   background-color: rgb(35, 44, 82);
   color: rgb(134, 130, 172);
 }
