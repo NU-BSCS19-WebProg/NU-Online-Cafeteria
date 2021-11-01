@@ -60,7 +60,7 @@ if (!isset($_SESSION['login_user2'])) {
       </div>
       <div class="row days-container text-center justify-content-center pb-5">
         <div class="col-md-7 d-flex justify-content-between">
-          <a href="" class="btn day">MON</a>
+          <span class="day-item active"><a href="" class="btn day">MON</a></span>
           <a href="" class="btn day">TUE</a>
           <a href="" class="btn day">WED</a>
           <a href="" class="btn day">THUR</a>

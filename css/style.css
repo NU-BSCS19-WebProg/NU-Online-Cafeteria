@@ -203,7 +203,7 @@ body.landing {
   font-weight: 700;
 }
 
-.btn.day {
+.btn.day, .day-item {
   border: none;
   border-radius: 30px;
 }
@@ -212,8 +212,12 @@ body.landing {
   background-color: rgb(255, 187, 0);
 }
 
-.btn.day:active {
+.btn.day:active, .day-item.active {
   background-color: rgb(241, 241, 255);
+}
+
+.food-grid .card {
+    box-shadow: 0px 6px 11px 0px rgba(0, 2, 136, 0.123);
 }
 
 /*--------------------------------------------------------------
