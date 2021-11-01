@@ -95,8 +95,8 @@ if (!isset($_SESSION['login_user2'])) {
                     <li class="list-group-item text-center">
                       <p class="card-text"><?php echo $row["description"]; ?></p>
                     </li>
-                    <li class="list-group-item">50 kcal</li>
-                    <li class="list-group-item">Allergens: Milk, Peanuts</li>
+                    <li class="list-group-item">50 kcal (placeholder)</li>
+                    <li class="list-group-item">Allergens: Milk, Peanuts (placeholder)</li>
                     <li class="list-group-item">
                       <h4>&#8369; <?php echo $row["price"]; ?></h4>
                     </li>
