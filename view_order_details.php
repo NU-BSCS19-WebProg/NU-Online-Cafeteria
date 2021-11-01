@@ -1,5 +1,5 @@
 <?php
-include('session_m.php');
+include('utils/session_m.php');
 
 if(!isset($login_session)){
 header('Location: managerlogin.php'); 
@@ -66,7 +66,7 @@ header('Location: managerlogin.php');
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#"><span class="glyphicon glyphicon-user"></span> Welcome <?php echo $login_session; ?> </a></li>
             <li class="active"> <a href="managerlogin.php">MANAGER CONTROL PANEL</a></li>
-            <li><a href="logout_m.php"><span class="glyphicon glyphicon-log-out"></span> Log Out </a></li>
+            <li><a href="utils/logout_m.php"><span class="glyphicon glyphicon-log-out"></span> Log Out </a></li>
           </ul>
         </div>
 

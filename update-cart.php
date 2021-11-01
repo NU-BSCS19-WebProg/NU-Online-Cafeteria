@@ -5,7 +5,7 @@ if(!isset($_SESSION))
     session_start();
   }
 
-include 'connection.php';
+include 'utils/connection.php';
 $conn = Connect();
 
 $F_ID = $_GET['id'];

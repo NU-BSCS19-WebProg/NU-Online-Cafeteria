@@ -1,0 +1,238 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+:root {
+  --main-blue: rgb(48, 64, 136);
+}
+
+/*--------------------------------------------------------------
+# COMMMON
+--------------------------------------------------------------*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  margin-top: 76px;
+}
+
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: gold;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+#myBtn:hover {
+  background-color: rgb(207, 178, 9);
+  color: white;
+}
+
+#myBtn > i {
+  color: rgb(49, 42, 42);
+}
+
+.modal .btn a {
+  text-decoration: none;
+  color: #fff !important;
+}
+
+/*--------------------------------------------------------------
+# NAVBAR
+--------------------------------------------------------------*/
+.navbar {
+  position: fixed;
+  z-index: 500;
+  transition: background-color 200ms linear;
+  background-color: var(--main-blue);
+  box-shadow: 0px 6px 11px 0px rgba(0, 2, 136, 0.178);
+  max-height: 76px;
+  width: 100%;
+  font-family: "Poppins", sans-serif;
+}
+
+.navbar-brand img {
+  height: 50px;
+}
+
+.navbar-brand span {
+  font-size: 1.5rem !important;
+  font-weight: 700;
+  color: gold !important;
+  padding-left: 1rem;
+}
+
+.nav-link,
+.nav-link :visited {
+  text-decoration: none;
+  color: #fff;
+}
+
+.nav-link:focus,
+.nav-link:hover {
+  color: gold;
+}
+
+.navbar-toggler-icon > i {
+  color: #fff;
+}
+
+/*--------------------------------------------------------------
+# LOGIN and SIGNUP
+--------------------------------------------------------------*/
+body.login,
+body.signup {
+  background: linear-gradient(
+      90deg,
+      rgba(25, 46, 161, 0.664),
+      rgba(18, 149, 151, 0.774)
+    ),
+    url("../images/table_food_plate.jpg");
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.login header,
+.signup header {
+  color: #fff;
+}
+
+.login header h1,
+.signup header h1 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+}
+
+.login header .website_name,
+.signup header .website_name {
+  color: gold;
+}
+
+/*--------------------------------------------------------------
+# INDEX
+--------------------------------------------------------------*/
+body.landing {
+  background: linear-gradient(90deg, rgba(8, 37, 56, 0.6), rgba(5, 60, 61, 0.6)),
+    url("../images/table_food.jpg");
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+}
+
+.landing > main img {
+  height: 10rem;
+}
+
+.landing > main .btn {
+  background-color: gold;
+  border: none;
+  color: rgb(71, 43, 23);
+}
+
+.landing > main .btn:hover {
+  background-color: rgb(197, 170, 13);
+}
+
+/*--------------------------------------------------------------
+# FOOD ZONE
+--------------------------------------------------------------*/
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+}
+
+.carousel-container > .header {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+}
+.carousel-container > .header h1 {
+  text-align: center;
+}
+
+.carousel-container > .header p {
+  text-align: center;
+}
+
+.carousel-item:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.menu-heading h2 {
+  font-size: 3.5rem;
+  font-weight: 700;
+}
+
+.menu-heading h6 {
+  color: rgb(255, 187, 0);
+  font-weight: 700;
+}
+
+.btn.day {
+  border: none;
+  border-radius: 30px;
+}
+
+.btn.day:hover {
+  background-color: rgb(255, 187, 0);
+}
+
+.btn.day:active {
+  background-color: rgb(241, 241, 255);
+}
+
+/*--------------------------------------------------------------
+# FOOTER
+--------------------------------------------------------------*/
+footer {
+  width: 100%;
+  background-color: var(--main-blue);
+  color: #fff;
+}
+
+footer .brand a {
+  font-size: 2.5rem !important;
+  font-weight: 700;
+  color: gold !important;
+  text-decoration: none;
+}
+
+footer .names {
+  background-color: rgb(35, 44, 82);
+  color: rgb(134, 130, 172);
+}
