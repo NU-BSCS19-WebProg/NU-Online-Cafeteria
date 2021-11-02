@@ -53,12 +53,14 @@ if (!isset($_SESSION['login_user2'])) {
     <div class="container py-5">
       <div class="row menu-heading text-center justify-content-center py-5">
         <div class="col-md-9">
-          <h6>Weekly Menu</h6>
+          <h6>Menu</h6>
           <h2>What's on the Menu?</h2>
-          <p>NU Laguna provides students with a wide variety of dishes. Find out what's on the menu this week!</p>
+          <p>NU Laguna provides students with a wide variety of dishes from various vendors. Find out what's on the menu!</p>
         </div>
       </div>
-      <div class="row days-container text-center justify-content-center pb-5">
+
+      <!-- FOOD BY WEEK ROW -->
+      <!-- <div class="row days-container text-center justify-content-center pb-5">
         <div class="col-md-7 d-flex justify-content-between">
           <span class="day-item active"><a href="" class="btn day">MON</a></span>
           <a href="" class="btn day">TUE</a>
@@ -67,7 +69,8 @@ if (!isset($_SESSION['login_user2'])) {
           <a href="" class="btn day">SAT</a>
           <a href="" class="btn day">SUN</a>
         </div>
-      </div>
+      </div> -->
+
       <!-- Display all Food from food table -->
       <?php
 
