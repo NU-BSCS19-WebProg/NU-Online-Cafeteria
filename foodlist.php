@@ -14,7 +14,7 @@ if (!isset($_SESSION['login_user2'])) {
 <body>
   <?=
   toTopBtn();
-  navbar();
+  navbar("foodlist");
   ?>
   <main class="py-0">
     <div class="carousel-container">

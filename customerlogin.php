@@ -16,7 +16,7 @@ if (isset($_SESSION['login_user2'])) {
 <body class="login">
   <?=
   toTopBtn();
-  navbar()
+  navbar("login");
   ?>
   <main>
     <div class="container">

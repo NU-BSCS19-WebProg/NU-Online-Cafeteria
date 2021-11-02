@@ -38,7 +38,7 @@ if (isset($_POST['submit'])) {
 <body class="signup">
   <?=
   toTopBtn();
-  navbar();
+  navbar("signup");
   ?>
   <main>
     <div class="modal fade" id="successModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">

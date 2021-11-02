@@ -43,7 +43,7 @@ if (isset($_POST['submit'])) {
 <body>
   <?=
   toTopBtn();
-  navbar();
+  navbar("control");
   ?>
   <main>
 

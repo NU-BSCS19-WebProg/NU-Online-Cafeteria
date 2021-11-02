@@ -88,6 +88,10 @@ main {
   color: #fff;
 }
 
+.nav-link.active {
+  color: gold;
+}
+
 .nav-link:focus,
 .nav-link:hover {
   color: gold;

@@ -12,7 +12,7 @@ include("common/components.php");
 <body>
   <?=
   toTopBtn();
-  navbar();
+  navbar("about");
   ?>
 
   <div class="wide">

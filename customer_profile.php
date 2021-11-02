@@ -10,7 +10,7 @@ include("common/components.php");
 
 <body>
     <?= toTopBtn();
-    navbar(); ?>
+    navbar("profile"); ?>
 
     <main>
         <div class="container">
