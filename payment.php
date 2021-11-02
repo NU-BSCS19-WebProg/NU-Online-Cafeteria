@@ -60,12 +60,12 @@ if (!isset($_SESSION['login_user2'])) {
       <hr>
       <br>
       <h1 class="text-center">Grand Total: &#8369;<?php echo "$gtotal"; ?></h1>
-      <h5 class="text-center">including all service charges. (no delivery charges applied)</h5>
+      <h5 class="text-center">All service charges included.</h5>
       <br>
       <h1 class="text-center">
         <a href="cart.php"><button class="btn btn-warning"><span class="bi-arrow-left-circle-fill"></span> Go back to cart</button></a>
         <a href="onlinepay.php"><button class="btn btn-success"><span class="bi-credit-card-fill"></span> Pay Online</button></a>
-        <a href="COD.php"><button class="btn btn-success"><span class="bi-cash"></span> Pay at the Counter</button></a>
+        <!-- <a href="COD.php"><button class="btn btn-success"><span class="bi-cash"></span> Pay at the Counter</button></a> -->
       </h1>
     </div>
   </main>

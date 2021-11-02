@@ -26,7 +26,7 @@ function navbar($page)
 
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="navbar-nav me-auto">
-          <li class="nav-item"><a href="aboutus.php" class="nav-link';
+          <li class="nav-item"><a href="about_us.php" class="nav-link';
   if ($page === "about") echo ' active';
   echo '">About</a></li></ul>';
   if (isset($_SESSION['login_user1'])) { //if admin
@@ -102,21 +102,22 @@ function footer()
   include("website_info.php");
   echo ' <footer class="footer mt-auto">
 <div class="container ">
-  <div class="col-md-6 brand">
-    <a href="index.php" class="mx-auto">';
+  <div class="col-md-6 mx-auto text-center brand">
+    <a href="index.php">';
   echo $website_name;
-
-  echo '</a><p>';
-  echo $website_name;
-  echo ' is an online cafeteria system for the students of NU Laguna.</p>
+  echo '</a>
+  <p>Since 2021</p>
   </div>
 </div>
 <div class="names py-2 text-center ">
-  <div class="container d-flex justify-content-between">
-    <span>Bowwi Katigbak</span>
-    <span>Maureen Kate Dadap</span>
-    <span>Reymar Bulanon</span>
-    <span>Zyrhus Joshua Tayag</span>
+  <div class="container">
+  <hr>
+  <div class="row justify-content-evenly">
+    <div class="col-lg-3"><span>Bowwi Katigbak</span></div>
+    <div class="col-lg-3"><span>Maureen Kate Dadap</span></div>
+    <div class="col-lg-3"><span>Reymar Bulanon</span></div>
+    <div class="col-lg-3"><span>Zyrhus Joshua Tayag</span></div>
+  </div>
   </div>
 </div>
 </footer>';

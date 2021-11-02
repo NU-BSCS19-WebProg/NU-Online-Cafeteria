@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("common/head_scripts.php");
 include("common/components.php");
 include("common/website_info.php");

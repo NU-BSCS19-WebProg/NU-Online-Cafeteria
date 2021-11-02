@@ -64,7 +64,8 @@ main {
   position: fixed;
   z-index: 500;
   transition: background-color 200ms linear;
-  background-color: var(--main-blue);
+  /* background-color: var(--main-blue); */
+  background-color: #fff;
   box-shadow: 0px 6px 11px 0px rgba(0, 2, 136, 0.178);
   max-height: 76px;
   width: 100%;
@@ -78,23 +79,24 @@ main {
 .navbar-brand span {
   font-size: 1.5rem !important;
   font-weight: 700;
-  color: gold !important;
+  /* color: gold !important; */
+  color: var(--main-blue);
   padding-left: 1rem;
 }
 
 .nav-link,
 .nav-link :visited {
   text-decoration: none;
-  color: #fff;
+  color: var(--main-blue);
 }
 
 .nav-link.active {
-  color: gold;
+  font-weight: 700;
 }
 
 .nav-link:focus,
 .nav-link:hover {
-  color: gold;
+  color: rgb(255, 174, 0);
 }
 
 .navbar-toggler-icon > i {
@@ -163,6 +165,24 @@ body.landing {
 }
 
 /*--------------------------------------------------------------
+# ABOUT
+--------------------------------------------------------------*/
+
+.about.jumbotron {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("../images/food.jpg");
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.about.jumbotron h1 {
+  font-weight: 700;
+}
+
+/*--------------------------------------------------------------
 # FOOD ZONE
 --------------------------------------------------------------*/
 
@@ -209,7 +229,8 @@ body.landing {
   font-weight: 700;
 }
 
-.btn.day, .day-item {
+.btn.day,
+.day-item {
   border: none;
   border-radius: 30px;
 }
@@ -218,12 +239,13 @@ body.landing {
   background-color: rgb(255, 187, 0);
 }
 
-.btn.day:active, .day-item.active {
+.btn.day:active,
+.day-item.active {
   background-color: rgb(241, 241, 255);
 }
 
 .food-grid .card {
-    box-shadow: 0px 6px 11px 0px rgba(0, 2, 136, 0.123);
+  box-shadow: 0px 6px 11px 0px rgba(0, 2, 136, 0.123);
 }
 
 /*--------------------------------------------------------------
@@ -237,14 +259,15 @@ footer {
 }
 
 footer .brand a {
-  font-size: 2.5rem !important;
+  font-size: 2rem !important;
   font-weight: 700;
-  color: gold !important;
+  /* color: gold !important; */
+  color: #fff;
   text-decoration: none;
 }
 
 footer .names {
-margin-top: 5rem;
-  background-color: rgb(35, 44, 82);
-  color: rgb(134, 130, 172);
+  margin-top: 8rem;
+  /* background-color: rgb(35, 44, 82); */
+  color: rgb(192, 192, 192);
 }

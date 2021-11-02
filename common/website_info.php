@@ -1,3 +1,3 @@
 <?php 
-$website_name = "Le Comscie'";
+$website_name = "Bulldog Bistro";
 ?>
