@@ -18,7 +18,7 @@ if (isset($_SESSION['login_user2'])) {
   toTopBtn();
   navbar()
   ?>
-  <main class="py-5">
+  <main>
     <div class="container">
       <header class="text-center">
         <h1>Hi Guest</h1>

@@ -16,7 +16,7 @@ if (!isset($_SESSION['login_user2'])) {
   toTopBtn();
   navbar();
   ?>
-  <main>
+  <main class="py-0">
     <div class="carousel-container">
       <div class="header">
         <h1 class="display-1">Welcome to <?php echo $website_name ?></h1>

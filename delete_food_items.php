@@ -15,7 +15,7 @@ if (!isset($login_session)) {
 <body>
   <?= toTopBtn();
   navbar(); ?>
-  <main class="py-5">
+  <main>
     <div class="container">
       <div class="row">
         <div class="col-md-4 text-center admin-side-bar">

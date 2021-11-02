@@ -24,6 +24,8 @@ body {
 
 main {
   margin-top: 76px;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
 }
 
 #myBtn {

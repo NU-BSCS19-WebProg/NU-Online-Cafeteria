@@ -17,7 +17,7 @@ if (!isset($_SESSION['login_user2']) || !isset($_SESSION['cart'])) {
 <body>
   <?= toTopBtn();
   navbar(); ?>
-  <main class="py-5">
+  <main>
     <div class="container">
       <div class="row">
         <h1 class="text-center">Online Payment</h1>

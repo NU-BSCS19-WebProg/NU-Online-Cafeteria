@@ -18,7 +18,7 @@ if (!isset($login_session)) {
   toTopBtn();
   navbar();
   ?>
-  <main class="py-5">
+  <main>
     <div class="container">
       <div class="row">
         <div class="col-md-4 text-center">

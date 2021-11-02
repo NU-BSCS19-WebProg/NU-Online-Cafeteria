@@ -17,7 +17,7 @@ if (!isset($_SESSION['login_user2'])) {
   <?= toTopBtn();
   navbar(); ?>
 
-  <main class="py-5">
+  <main>
 
     <?php
     $gtotal = 0;

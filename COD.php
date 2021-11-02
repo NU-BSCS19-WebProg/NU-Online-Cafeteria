@@ -20,7 +20,7 @@ unset($_SESSION["cart"]);
   <?= toTopBtn();
   navbar(); ?>
 
-  <main class="py-5">
+  <main>
     <div class="container">
       <div class="card text-white bg-success mb-3 w-50 mx-auto">
         <div class="card-header">Success</div>
