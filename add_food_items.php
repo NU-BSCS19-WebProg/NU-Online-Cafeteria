@@ -1,5 +1,4 @@
 <?php
-session_start();
 include('utils/session_m.php');
 include("common/head_scripts.php");
 include("common/components.php");
@@ -16,23 +15,49 @@ if (isset($_POST['submit'])) {
   $price = $conn->real_escape_string($_POST['price']);
   $description = $conn->real_escape_string($_POST['description']);
 
+  $target_dir = "images/";
+  $target_file = $target_dir . basename($_FILES["image"]["name"]);
+  $uploadOk = 1;
+  $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-  // Storing Session
-  $user_check = $_SESSION['login_user1'];
-  $R_IDsql = "SELECT RESTAURANTS.R_ID FROM RESTAURANTS, MANAGER WHERE RESTAURANTS.M_ID='$user_check'";
-  $R_IDresult = mysqli_query($conn, $R_IDsql);
-  $R_IDrs = mysqli_fetch_array($R_IDresult, MYSQLI_BOTH);
-  $R_ID = $R_IDrs['R_ID'];
-
-  $images_path = $conn->real_escape_string($_POST['images_path']);
-
-  $query = "INSERT INTO FOOD(name,price,description,R_ID,images_path) VALUES('" . $name . "','" . $price . "','" . $description . "','" . $R_ID . "','" . $images_path . "')";
-  $success = $conn->query($query);
-
-  if (!$success) {
-    $error = ("Couldnt enter data: " . $conn->error);
+  // Check if image file is a actual image or fake image
+  $check = getimagesize($_FILES["image"]["tmp_name"]);
+  if ($check !== false) {
+    $uploadOk = 1;
   } else {
-    $response = "success";
+    $error = "File is not an image.";
+    $uploadOk = 0;
+  }
+
+  // Check if file already exists
+  if (file_exists($target_file)) {
+    $error = "Sorry, file already exists.";
+    $uploadOk = 0;
+  }
+
+  // Check if $uploadOk is set to 0 by an error
+  if ($uploadOk !== 0) {
+    if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+      // Storing Session
+      $user_check = $_SESSION['login_user1'];
+      $R_IDsql = "SELECT RESTAURANTS.R_ID FROM RESTAURANTS, MANAGER WHERE RESTAURANTS.M_ID='$user_check'";
+      $R_IDresult = mysqli_query($conn, $R_IDsql);
+      $R_IDrs = mysqli_fetch_array($R_IDresult, MYSQLI_BOTH);
+      $R_ID = $R_IDrs['R_ID'];
+
+      $images_path = $target_file;
+
+      $query = "INSERT INTO FOOD(name,price,description,R_ID,images_path) VALUES('" . $name . "','" . $price . "','" . $description . "','" . $R_ID . "','" . $images_path . "')";
+      $success = $conn->query($query);
+
+      if (!$success) {
+        $error = ("Couldnt enter data: " . $conn->error);
+      } else {
+        $response = "success";
+      }
+    } else {
+      $error = "Sorry, there was an error uploading your file.";
+    }
   }
 }
 
@@ -71,7 +96,7 @@ if (isset($_POST['submit'])) {
         </div>
         <div class="col-md-8">
           <div class="form-area px-lg-5 mx-lg-5">
-            <form action="" method="POST">
+            <form action="" method="POST" enctype="multipart/form-data">
               <br style="clear: both">
               <h3 class="text-center mb-4">ADD NEW FOOD ITEM HERE</h3>
 
@@ -90,7 +115,8 @@ if (isset($_POST['submit'])) {
               </div>
 
               <div class="form-group mb-3">
-                <input type="text" class="form-control" id="images_path" name="images_path" placeholder="Your Food Image Path [images/<filename>.<extention>]" required="">
+                <!-- <input type="text" class="form-control" id="images_path" name="images_path" placeholder="Your Food Image Path [images/<filename>.<extention>]" required=""> -->
+                <input type="file" class="form-control" id="image" name="image" value="Select Image" required="">
               </div>
 
               <div class="form-group mb-3">
