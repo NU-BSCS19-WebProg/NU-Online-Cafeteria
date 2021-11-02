@@ -15,7 +15,10 @@ include("common/components.php");
     <main>
         <div class="container">
             <div class="row">
-                <h1>My orders</h1>
+                <h1>My Orders</h1>
+            </div>
+            <div>
+                <h1>Past Orders</h1>
             </div>
         </div>
     </main>

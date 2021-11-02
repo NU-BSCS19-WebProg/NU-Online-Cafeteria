@@ -116,7 +116,7 @@ function adminSideBar($page)
 {
   echo '<div class="text-start">
     <h1>Hello Manager! </h1>
-    <p>Manage all your restaurant from here</p>
+    <p>Manage your restaurant from here</p>
   </div>
   <div class="list-group">';
 
