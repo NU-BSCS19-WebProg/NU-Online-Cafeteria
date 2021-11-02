@@ -62,6 +62,9 @@ if (isset($_POST['submit'])) {
           <?= adminSideBar("restaurant"); ?>
         </div>
         <div class="col-md-8">
+          <?php
+          ?>
+
           <div class="form-area px-lg-5 mx-lg-5">
             <form action="" method="POST">
               <br style="clear: both">

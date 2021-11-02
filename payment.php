@@ -65,7 +65,7 @@ if (!isset($_SESSION['login_user2'])) {
       <h1 class="text-center">
         <a href="cart.php"><button class="btn btn-warning"><span class="bi-arrow-left-circle-fill"></span> Go back to cart</button></a>
         <a href="onlinepay.php"><button class="btn btn-success"><span class="bi-credit-card-fill"></span> Pay Online</button></a>
-        <a href="COD.php"><button class="btn btn-success"><span class="bi-cash"></span> Cash On Delivery</button></a>
+        <a href="COD.php"><button class="btn btn-success"><span class="bi-cash"></span> Pay at the Counter</button></a>
       </h1>
     </div>
   </main>

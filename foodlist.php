@@ -85,7 +85,7 @@ if (!isset($_SESSION['login_user2'])) {
             echo "<div class='row py-5 food-grid'>";
 
       ?>
-          <div class="col-md-3">
+          <div class="col-md-5 col-lg-3">
             <form method="post" action="cart.php?action=add&id=<?php echo $row["F_ID"]; ?>">
               <div class="card" align="center" ;>
                 <img src="<?php echo $row["images_path"]; ?>" class="card-img-top">

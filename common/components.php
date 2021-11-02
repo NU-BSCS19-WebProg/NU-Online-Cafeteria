@@ -44,7 +44,7 @@ function navbar()
   } else if (isset($_SESSION['login_user2'])) {
     echo '
         <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a href="#" class="nav-link"><span class="bi-person-fill"></span> Welcome ';
+        <li class="nav-item"><a href="customer_profile.php" class="nav-link"><span class="bi-person-fill"></span> Welcome ';
     echo $_SESSION['login_user2'];
     echo '</a></li>
         <li class="nav-item"><a href="foodlist.php" class="nav-link"><span class="fa fa-cutlery"></span> Food Zone </a></li>
