@@ -16,7 +16,7 @@ if (!isset($login_session)) {
 <body>
   <?=
   toTopBtn();
-  navbar();
+  navbar("control");
   ?>
   <main>
     <div class="container">
@@ -28,7 +28,7 @@ if (!isset($login_session)) {
           <div class="form-area px-lg-5 mx-lg-5">
             <form action="" method="POST">
               <br style="clear: both">
-              <h3 class="text-center mb-4">YOUR FOOD ITEMS LIST</h3>
+              <h3 class="text-center mb-4">FOOD ITEMS LIST</h3>
               <?php
               // Storing Session
               $user_check = $_SESSION['login_user1'];

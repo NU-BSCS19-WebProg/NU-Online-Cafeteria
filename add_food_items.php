@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('utils/session_m.php');
 include("common/head_scripts.php");
 include("common/components.php");
@@ -43,7 +44,7 @@ if (isset($_POST['submit'])) {
 <body>
   <?=
   toTopBtn();
-  navbar();
+  navbar("control");
   ?>
   <main>
 

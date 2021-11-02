@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("common/head_scripts.php");
 include("common/components.php");
 include("common/website_info.php");
@@ -36,7 +37,7 @@ if (isset($_POST['submit'])) {
 <body class="signup">
   <?=
   toTopBtn();
-  navbar()
+  navbar("signup");
   ?>
   <main>
     <div class="modal fade" id="successModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">

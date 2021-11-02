@@ -15,7 +15,7 @@
 
     <body class="login">
       <?= toTopBtn();
-      navbar() ?>
+      navbar("login") ?>
       <main>
         <div class="container">
           <header class="text-center">

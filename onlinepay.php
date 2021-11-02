@@ -16,7 +16,7 @@ if (!isset($_SESSION['login_user2']) || !isset($_SESSION['cart'])) {
 
 <body>
   <?= toTopBtn();
-  navbar(); ?>
+  navbar("cart"); ?>
   <main>
     <div class="container">
       <div class="row">

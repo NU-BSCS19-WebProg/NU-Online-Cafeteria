@@ -19,7 +19,7 @@ if (!isset($login_session)) {
 
 <body>
   <?= toTopBtn();
-  navbar(); ?>
+  navbar("control"); ?>
   <main>
     <div class="container">
       <div class="row">

@@ -11,7 +11,7 @@ include("common/components.php");
 <body class="landing">
   <?=
   toTopBtn();
-  navbar()
+  navbar("");
   ?>
 
   <main>

@@ -18,7 +18,7 @@ unset($_SESSION["cart"]);
 
 <body>
   <?= toTopBtn();
-  navbar(); ?>
+  navbar("cart"); ?>
 
   <main>
     <div class="container">

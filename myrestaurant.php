@@ -37,7 +37,7 @@ if (isset($_POST['submit'])) {
 <body>
   <?=
   toTopBtn();
-  navbar();
+  navbar("control");
   ?>
   <main>
     <div class="modal fade" id="successModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">

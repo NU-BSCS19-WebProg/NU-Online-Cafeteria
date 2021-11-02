@@ -8,8 +8,7 @@ function toTopBtn()
     </button>';
 }
 
-
-function navbar()
+function navbar($page)
 {
   include("website_info.php");
 
@@ -27,28 +26,36 @@ function navbar()
 
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="navbar-nav me-auto">
-          <li class="nav-item"><a href="aboutus.php" class="nav-link">About</a></li>
-        </ul>';
-  if (isset($_SESSION['login_user1'])) {
+          <li class="nav-item"><a href="about_us.php" class="nav-link';
+  if ($page === "about") echo ' active';
+  echo '">About</a></li></ul>';
+  if (isset($_SESSION['login_user1'])) { //if admin
     echo '
             <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a href="#" class="nav-link"><span class="bi-person-fill"></span> Welcome 
-            ';
+            <li class="nav-item"><a href="#" class="nav-link"><span class="bi-person-fill"></span> Welcome ';
     echo $_SESSION['login_user1'];
     echo '
             </a></li>
-            <li class="nav-item"><a href="myrestaurant.php" class="nav-link"><span class="fa fa-tools"></span> MANAGER CONTROL PANEL</a></li>
+            <li class="nav-item"><a href="myrestaurant.php" class="nav-link';
+            if ($page === "control") echo ' active';
+            echo '"><span class="fa fa-tools"></span> MANAGER CONTROL PANEL</a></li>
             <li class="nav-item"><a href="utils/logout_m.php" class="nav-link"><span class="bi-box-arrow-left"></span> Log Out </a></li>
           </ul>
           ';
-  } else if (isset($_SESSION['login_user2'])) {
+  } else if (isset($_SESSION['login_user2'])) { //if customer
     echo '
         <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a href="customer_profile.php" class="nav-link"><span class="bi-person-fill"></span> Welcome ';
+        <li class="nav-item"><a href="customer_profile.php" class="nav-link';
+    if ($page === "profile") echo ' active';
+    echo '"><span class="bi-person-fill"></span> Welcome ';
     echo $_SESSION['login_user2'];
     echo '</a></li>
-        <li class="nav-item"><a href="foodlist.php" class="nav-link"><span class="fa fa-cutlery"></span> Food Zone </a></li>
-        <li class="nav-item"><a href="cart.php" class="nav-link"><span class="bi-cart-fill"></span> Cart (';
+        <li class="nav-item"><a href="foodlist.php" class="nav-link';
+    if ($page === "foodlist") echo ' active';
+    echo '"><span class="fa fa-cutlery"></span> Food Zone </a></li>
+        <li class="nav-item"><a href="cart.php" class="nav-link';
+    if ($page === "cart") echo ' active';
+    echo '"><span class="bi-cart-fill"></span> Cart (';
     if (isset($_SESSION["cart"])) {
       $count = count($_SESSION["cart"]);
       echo "$count";
@@ -62,9 +69,10 @@ function navbar()
     echo '
     <ul class="navbar-nav ms-auto">
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <span class="bi-person-fill"></span> Sign Up
-            </a>
+            <a class="nav-link';
+    if ($page === "signup") echo ' active';
+    echo ' dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="bi-person-fill"></span> Sign Up</a>
             <ul class="dropdown-menu">
                 <li><a href="customersignup.php" class="dropdown-item">User Sign-up</a></li>
                 <li><a href="managersignup.php" class="dropdown-item">Manager Sign-up</a></li>
@@ -72,7 +80,9 @@ function navbar()
         </li>
 
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link';
+    if ($page === "login") echo ' active';
+    echo ' dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <span class="bi-box-arrow-right"></span> Login
             </a>
             <ul class="dropdown-menu">
@@ -92,21 +102,22 @@ function footer()
   include("website_info.php");
   echo ' <footer class="footer mt-auto">
 <div class="container ">
-  <div class="col-md-6 brand">
-    <a href="index.php" class="mx-auto">';
+  <div class="col-md-6 mx-auto text-center brand">
+    <a href="index.php">';
   echo $website_name;
-
-  echo '</a><p>';
-  echo $website_name;
-  echo ' is an online cafeteria system for the students of NU Laguna.</p>
+  echo '</a>
+  <p>Since 2021</p>
   </div>
 </div>
 <div class="names py-2 text-center ">
-  <div class="container d-flex justify-content-between">
-    <span>Bowwi Katigbak</span>
-    <span>Maureen Kate Dadap</span>
-    <span>Reymar Bulanon</span>
-    <span>Zyrhus Joshua Tayag</span>
+  <div class="container">
+  <hr>
+  <div class="row justify-content-evenly">
+    <div class="col-lg-3"><span>Bowwi Katigbak</span></div>
+    <div class="col-lg-3"><span>Maureen Kate Dadap</span></div>
+    <div class="col-lg-3"><span>Reymar Bulanon</span></div>
+    <div class="col-lg-3"><span>Zyrhus Joshua Tayag</span></div>
+  </div>
   </div>
 </div>
 </footer>';
@@ -132,12 +143,17 @@ function adminSideBar($page)
   if ($page === "add") echo ' active';
   echo '">Add Food Items</a>';
 
-  echo ' <a href="edit_food_items.php" class="list-group-item'; 
+  echo ' <a href="edit_food_items.php" class="list-group-item';
   if ($page === "edit") echo ' active';
   echo '">Edit Food Items</a>';
 
-  echo '<a href="delete_food_items.php" class="list-group-item'; 
+  echo '<a href="delete_food_items.php" class="list-group-item';
   if ($page === "delete") echo ' active';
-  echo'">Delete Food Items</a>';
+  echo '">Delete Food Items</a>';
+
+  echo '<a href="view_order_details.php" class="list-group-item';
+  if ($page === "orders") echo ' active';
+  echo '">View Order Details</a>';
+
   echo '</div>';
 }
