@@ -62,9 +62,6 @@ if (isset($_POST['submit'])) {
           <?= adminSideBar("restaurant"); ?>
         </div>
         <div class="col-md-8">
-          <?php
-          ?>
-
           <div class="form-area px-lg-5 mx-lg-5">
             <form action="" method="POST">
               <br style="clear: both">
@@ -85,6 +82,8 @@ if (isset($_POST['submit'])) {
               <div class="form-group mb-3">
                 <input type="text" class="form-control" id="address" name="address" placeholder="Your Restaurant's Address" required="">
               </div>
+
+              <label class="text-danger mb-3"><span> <?php echo $error;  ?> </span></label>
 
               <div class="form-group mb-3">
                 <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right"> ADD RESTAURANT </button>

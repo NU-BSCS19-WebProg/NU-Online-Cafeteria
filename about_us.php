@@ -3,7 +3,6 @@ session_start();
 include("common/website_info.php");
 include("common/head_scripts.php");
 include("common/components.php");
-
 ?>
 
 <html>
@@ -30,7 +29,6 @@ include("common/components.php");
             as safely and efficiently as possible. Thank you for your patience as we continue to
             evolve in this constantly changing environment.</p>
           <p> We place no minimum order restrictions! Order in as little (or as much) as you'd like. We'll give it to you!</p>
-
           <h4>How does it work?</h4>
           <ol>
             <li>Place your order.</li>
