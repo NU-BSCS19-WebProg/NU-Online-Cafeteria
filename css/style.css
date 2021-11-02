@@ -139,7 +139,7 @@ body.signup {
 /*--------------------------------------------------------------
 # INDEX
 --------------------------------------------------------------*/
-body.landing {
+.landing > main {
   background: linear-gradient(90deg, rgba(8, 37, 56, 0.6), rgba(5, 60, 61, 0.6)),
     url("../images/table_food.jpg");
   background-size: cover;
@@ -173,8 +173,8 @@ body.landing {
   padding-bottom: 8rem;
   background: linear-gradient(90deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url("../images/food.jpg");
-  background-position: bottom;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   background-size: cover;
 }
 

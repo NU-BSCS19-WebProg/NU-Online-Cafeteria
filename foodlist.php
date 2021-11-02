@@ -7,6 +7,7 @@ include("common/components.php");
 if (!isset($_SESSION['login_user2'])) {
   header("location: customerlogin.php");
 }
+
 ?>
 <html>
 <?= head("Food Zone") ?>
@@ -60,7 +61,7 @@ if (!isset($_SESSION['login_user2'])) {
       </div>
 
       <!-- FOOD BY WEEK ROW -->
-      <!-- <div class="row days-container text-center justify-content-center pb-5">
+      <div class="row days-container text-center justify-content-center pb-5">
         <div class="col-md-7 d-flex justify-content-between">
           <span class="day-item active"><a href="" class="btn day">MON</a></span>
           <a href="" class="btn day">TUE</a>
@@ -69,7 +70,7 @@ if (!isset($_SESSION['login_user2'])) {
           <a href="" class="btn day">SAT</a>
           <a href="" class="btn day">SUN</a>
         </div>
-      </div> -->
+      </div>
 
       <!-- Display all Food from food table -->
       <?php
@@ -85,7 +86,7 @@ if (!isset($_SESSION['login_user2'])) {
 
         while ($row = mysqli_fetch_assoc($result)) {
           if ($count == 0)
-            echo "<div class='row py-5 food-grid'>";
+            echo "<div class='row py-5 food-grid justify-content-center'>";
 
       ?>
           <div class="col-md-5 col-lg-3">

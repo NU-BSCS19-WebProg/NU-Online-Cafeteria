@@ -6,6 +6,8 @@ include("common/components.php");
 
 if (isset($_SESSION['login_user2'])) {
   header("location: foodlist.php");
+} if(isset($_SESSION['login_user1'])) {
+  header("location: myrestaurant.php");
 }
 ?>
 
