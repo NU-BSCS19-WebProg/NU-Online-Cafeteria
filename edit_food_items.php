@@ -8,7 +8,7 @@ if (!isset($login_session)) {
 }
 
 $error = "";
-$response="";
+$response = "";
 
 if (isset($_POST['submit'])) {
   $F_ID = $_POST['dfid'];
@@ -178,40 +178,15 @@ if (isset($_POST['submit'])) {
                   <div class="btn-group" role="group">
                     <?php
                     $F_ID = $row1['F_ID'];
-                    // $query =  "SELECT a.day_id, a.day_name, b.weekly_item_id, b.F_ID FROM week a LEFT JOIN weekly_items b ON a.day_id = b.day_id ORDER BY a.day_id ASC";
-                    $query = "SELECT * FROM week"; // generate the button group of days
+                    $query = "SELECT a.day_id, a.day_name, b.F_ID FROM week a LEFT OUTER JOIN (SELECT * FROM weekly_items WHERE F_ID = $F_ID) b ON (a.day_id = b.day_id) ORDER BY a.day_id ASC";
                     $result = $conn->query($query);
-
-                    $query2 = "SELECT * FROM weekly_items WHERE F_ID = $F_ID"; //get the days food item is available
-                    //$query2 = "SELECT a.day_id, b.weekly_item_id, b.F_ID FROM week a LEFT JOIN weekly_items b ON a.day_id = b.day_id WHERE F_ID = $F_ID";
-                    $result2 = $conn->query($query2);
-
-                    if ($result && $result2) {
+                    if ($result) {
                       while ($row2 = mysqli_fetch_assoc($result)) { ?>
-                          <input type="checkbox" class="btn-check" name="week[]" 
-                          id="<?php echo $row2['day_id']; ?>" 
-                          value="<?php echo $row2['day_id']; ?>" autocomplete="off" 
-                          <?php 
-                          
-                            while ($row3 = mysqli_fetch_assoc($result2)) {
-                              if ($row2['day_id'] === $row3['day_id']) {
-
-                              }
-
-                              // if (in_array($row2['day_id'], $row3))
-                              // {
-                              //   echo ' checked';
-                              //   break ;
-                              // }
-
-                              // echo ' not this day';
-                            }
-                          
-                           ?>>
-                          <label class="btn btn-outline-secondary" for="<?php echo $row2['day_id'] ?>"><?php echo $row2['day_name']; ?></label>
-                    <?php     
-                    }
-                    ?>
+                        <input type="checkbox" class="btn-check" name="week[]" id="<?php echo $row2['day_id']; ?>" value="<?php echo $row2['day_id']; ?>" autocomplete="off" <?php if ($row2['F_ID'] !== null) echo ' checked'; ?>>
+                        <label class="btn btn-outline-secondary" for="<?php echo $row2['day_id'] ?>"><?php echo $row2['day_name']; ?></label>
+                      <?php
+                      }
+                      ?>
                   </div>
                 </div>
 
@@ -219,11 +194,11 @@ if (isset($_POST['submit'])) {
                   <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">UPDATE</button>
                 </div>
               </form>
-          <?php
-              }
-            }
-          }
-          ?>
+        <?php
+                    }
+                  }
+                }
+        ?>
             </div>
           </div>
           <?php

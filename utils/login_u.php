@@ -12,8 +12,10 @@ else
 $username=$_POST['username'];
 $password=$_POST['password'];
 // Establishing Connection with Server by passing server_name, user_id and password as a parameter
-require 'connection.php';
+require_once 'connection.php';
 $conn = Connect();
+
+include("getCurrentDay.php");
 
 // SQL query to fetch information of registerd users and finds user match.
 $query = "SELECT username, password FROM CUSTOMER WHERE username=? AND password=? LIMIT 1";
