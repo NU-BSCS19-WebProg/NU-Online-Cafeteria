@@ -30,6 +30,7 @@ if (isset($_POST['submit'])) {
         //saving into weekly items table
         $query = "INSERT INTO weekly_items (day_id, F_ID) VALUES ($id, $F_ID)";
         $success = $conn->query($query);
+        $response = "success";
       }
     }
   } else {
@@ -53,6 +54,7 @@ if (isset($_POST['submit'])) {
             //saving into weekly items table
             $query = "INSERT INTO weekly_items (day_id, F_ID) VALUES ($id, $F_ID)";
             $success = $conn->query($query);
+            $response = "success";
           }
         }
       } else {
