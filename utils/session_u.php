@@ -1,5 +1,5 @@
 <?php
-require 'connection.php';
+require_once 'connection.php';
 $conn = Connect();
 
 session_start();

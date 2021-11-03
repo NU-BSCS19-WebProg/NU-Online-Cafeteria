@@ -28,7 +28,7 @@ $stmt -> store_result();
 if ($stmt->fetch())  
 {
 	$_SESSION['login_user2']=$username; // Initializing Session
-	header("location: foodlist.php"); // Redirecting To Other Page
+	header("location: foodlist.php?id=".setDayIDURL()); // Redirecting To Other Page
 } else {
 $error = "Username or Password is invalid";
 }

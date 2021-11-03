@@ -8,12 +8,6 @@ if (!isset($_SESSION['login_user2'])) {
   header("location: customerlogin.php");
 }
 
-$currentDay = date('D');
-$query = "SELECT * FROM week WHERE day_name = '$currentDay';";
-$result = $conn->query($query);
-$day_id = mysqli_fetch_array($result)['day_id'];
-
-//header("Location: foodlist.php?day=" . $day_id);
 ?>
 <html>
 <?= head("Food Zone") ?>
@@ -69,10 +63,13 @@ $day_id = mysqli_fetch_array($result)['day_id'];
       <!-- FOOD BY WEEK ROW -->
       <div class="row days-container text-center justify-content-center pb-5">
         <div class="col-md-7 d-flex justify-content-between">
-          <?php while ($week = mysqli_fetch_array($result)) { ?>
-            <span class="day-item" <?php //if ($_GET['day_id'] === $week['day_id']) echo 'active' ?>>
-              <a href="foodlist.php?day_id=<?php echo $week['day_id'] ?>" class="btn day"><?php echo $week['day_name'] ?>
-              </a>
+          <?php
+          $query = "SELECT * FROM week";
+          $result = $conn->query($query);
+
+          while ($week = mysqli_fetch_array($result)) { ?>
+            <span class="day-item <?php if ($_GET['id'] === $week['day_id']) echo 'active'; ?>">
+              <a href="foodlist.php?id=<?php echo $week['day_id'] ?>" class="btn day"><?php echo $week['day_name'] ?></a>
             </span>
           <?php } ?>
         </div>
@@ -81,10 +78,9 @@ $day_id = mysqli_fetch_array($result)['day_id'];
       <!-- Display all Food from food table -->
       <?php
 
-      require 'utils/connection.php';
-      $conn = Connect();
-
-      $sql = "SELECT * FROM FOOD WHERE options = 'ENABLE' ORDER BY F_ID";
+      // $sql = "SELECT * FROM FOOD WHERE options = 'ENABLE' ORDER BY F_ID";
+      $id = $_GET['id'];
+      $sql = "SELECT DISTINCT a.day_id, b.* FROM weekly_items a, food b WHERE a.F_ID = b.F_ID AND a.day_id = $id AND b.options = 'ENABLE' ORDER BY a.F_ID";
       $result = mysqli_query($conn, $sql);
 
       if (mysqli_num_rows($result) > 0) {

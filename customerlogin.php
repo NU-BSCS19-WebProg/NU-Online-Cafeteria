@@ -5,7 +5,7 @@ include("common/head_scripts.php");
 include("common/components.php");
 
 if (isset($_SESSION['login_user2'])) {
-  header("location: foodlist.php");
+  header("location: foodlist.php?id=".setDayIDURL());
 } if(isset($_SESSION['login_user1'])) {
   header("location: myrestaurant.php");
 }
