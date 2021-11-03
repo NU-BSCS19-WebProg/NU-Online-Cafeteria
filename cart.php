@@ -48,19 +48,21 @@ $response = "";
     $OI_total_price = $food_price * $food_quantity;
     $username = $login_session;
 
-    $query = "INSERT INTO order_items (O_ID, F_ID, foodname, quantity, username, R_ID) VALUES ($O_ID, $F_ID, '$food_name', $food_quantity, '$username', $R_ID)";
+    $query = "INSERT INTO order_items (O_ID, F_ID, foodname, price, quantity, username, R_ID) VALUES ($O_ID, $F_ID, '$food_name', $food_price, $food_quantity, '$username', $R_ID)";
     mysqli_query($conn, $query);
-    //$response = "success";
     header("Location: cart.php");
     die;
   }
 
-  if (isset($_GET["action"])) {
-    if ($_GET["action"] == "delete") {
-      $query = "DELETE FROM order_items WHERE order_item_ID = " . $_GET['id'];
-      mysqli_query($conn, $query);
-      $response = "deleted";
-    }
+  if (isset($_POST['delete'])) {
+    $query = "DELETE FROM order_items WHERE order_item_ID = " . $_POST['hidden_OID'];
+    mysqli_query($conn, $query);
+    $response = "deleted";
+  } else if (isset($_POST['update'])) {
+    $query = "UPDATE order_items SET quantity = " . $_POST['quantity'] . " WHERE order_item_ID = " . $_POST['hidden_OID'];
+    mysqli_query($conn, $query);
+    $food_name = $_POST['hidden_name'];
+    $response = "updated";
   }
 
   if (isset($_GET["action"])) {
@@ -81,7 +83,7 @@ $response = "";
           <h5 class="modal-title text-success">Success</h5>
         </div>
         <div class="modal-body">
-          <p><?php echo $food_name ?> has been added.</p>
+          <p><?php echo $food_name ?> quantity has been updated.</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary"><a href="cart.php">Okay</a></button>
@@ -137,17 +139,17 @@ $response = "";
     ?>
       <div class="container">
         <div class="row">
-          <div class="col-lg-9">
+          <div class="col-lg-10">
             <h1>Your Shopping Cart</h1>
 
             <table class="table table-striped">
               <thead class="thead-dark">
                 <tr>
-                  <th width="40%">Food Name</th>
+                  <th width="35%">Food Name</th>
                   <th width="10%">Quantity</th>
-                  <th width="20%">Item Price</th>
+                  <th width="15%">Item Price</th>
                   <th width="15%">Item(s) Total Price</th>
-                  <th width="5%">Delete</th>
+                  <th width="15%">Actions</th>
                 </tr>
               </thead>
               <?php
@@ -157,13 +159,20 @@ $response = "";
               if ($result && mysqli_num_rows($result) > 0) {
                 while ($values = mysqli_fetch_assoc($result)) {
               ?>
-                  <tr>
-                    <td><?php echo $values["name"]; ?></td>
-                    <td><?php echo $values["quantity"] ?></td>
-                    <td>&#8369; <?php echo $values["price"]; ?></td>
-                    <td>&#8369; <?php echo number_format($values["quantity"] * $values["price"], 2); ?></td>
-                    <td><a href="cart.php?action=delete&id=<?php echo $values["order_item_ID"]; ?>"><span class="text-danger">Remove</span></a></td>
-                  </tr>
+                  <form action="" method="POST">
+                    <tr>
+                      <td><?php echo $values["name"]; ?></td>
+                      <td><input type="number" min="1" max="25" name="quantity" class="form-control d-inline-block" value="<?php echo $values["quantity"] ?>" style="width: 60px;"> </td>
+                      <td>&#8369; <?php echo $values["price"]; ?></td>
+                      <td>&#8369; <?php echo number_format($values["quantity"] * $values["price"], 2); ?></td>
+                      <input type="hidden" name="hidden_OID" value="<?php echo $values["order_item_ID"]; ?>">
+                      <input type="hidden" name="hidden_name" value="<?php echo $values["name"]; ?>">
+                      <td class="display-inline">
+                        <input type="submit" name="update" value="update" class="btn btn-success">
+                        <input type="submit" name="delete" value="delete" class="btn btn-danger">
+                      </td>
+                    </tr>
+                  </form>
               <?php
                   $total = $total + ($values["quantity"] * $values["price"]);
                 }
@@ -204,7 +213,7 @@ $response = "";
     var successModal = new bootstrap.Modal(document.getElementById('successModal'));
     var deleteModal = new bootstrap.Modal(document.getElementById('deletedModal'));
     var emptiedModal = new bootstrap.Modal(document.getElementById('emptiedModal'));
-    if (response == "success") {
+    if (response == "updated") {
       successModal.show();
     } else if (response === "deleted") {
       deleteModal.show();
