@@ -8,13 +8,14 @@ if (!isset($login_session)) {
 }
 
 $error = "";
+$response="";
 
 if (isset($_POST['submit'])) {
   $F_ID = $_POST['dfid'];
   $name = $_POST['dname'];
   $price = $_POST['dprice'];
   $description = $_POST['ddescription'];
-  $calories = $conn->real_escape_string($_POST['dcalories']);
+  $calories = $_POST['dcalories'];
   $allergens = $_POST['dallergens'];
 
   $target_dir = "images/";
@@ -24,15 +25,15 @@ if (isset($_POST['submit'])) {
     $target_file = $_POST['old_image'];
     $query = mysqli_query($conn, "UPDATE food set name='$name', price='$price', calories='$calories', allergens='$allergens', description='$description', images_path='$target_file' where F_ID='$F_ID'");
     $query = "DELETE FROM weekly_items WHERE F_ID = '$F_ID'";
-    $conn -> query($query);
-    if (!empty($_POST['week'])) { 
+    $conn->query($query);
+    if (!empty($_POST['week'])) {
       foreach ($_POST['week'] as $id) {
         //saving into weekly items table
         $query = "INSERT INTO weekly_items (day_id, F_ID) VALUES ($id, $F_ID)";
         $success = $conn->query($query);
-        $response = "success";
       }
     }
+    $response = "success";
   } else {
     $target_file = $target_dir . basename($_FILES["image"]["name"]);
     // Check if image file is a actual image or fake image
@@ -48,15 +49,15 @@ if (isset($_POST['submit'])) {
       if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
         $query = mysqli_query($conn, "UPDATE food set name='$name', price='$price', calories='$calories', allergens='$allergens', description='$description', images_path='$target_file' where F_ID='$F_ID'");
         $query = "DELETE FROM weekly_items WHERE F_ID = '$F_ID'";
-        $conn -> query($query);
+        $conn->query($query);
         if (!empty($_POST['week'])) {
           foreach ($_POST['week'] as $id) {
             //saving into weekly items table
             $query = "INSERT INTO weekly_items (day_id, F_ID) VALUES ($id, $F_ID)";
             $success = $conn->query($query);
-            $response = "success";
           }
         }
+        $response = "success";
       } else {
         $error = "Sorry, there was an error uploading your image.";
       }
@@ -98,11 +99,11 @@ if (isset($_POST['submit'])) {
         </div>
         <div class="col-md-8">
           <div class="form-area px-lg-5 mx-lg-5">
-            <h3 class="text-center mb-4">Click On Menu</h3>
+            <h3 class="mb-4">Select food item to edit</h3>
             <?php
             $query = mysqli_query($conn, "SELECT * FROM food f WHERE f.R_ID IN (SELECT r.R_ID FROM RESTAURANTS r WHERE r.M_ID='$user_check') ORDER BY F_ID");
             while ($row = mysqli_fetch_array($query)) { ?>
-              <div class="list-group text-center">
+              <div class="list-group">
                 <?php
                 echo "<b><a href='edit_food_items.php?update= {$row['F_ID']}'>{$row['name']}</a></b>";
                 ?>
@@ -115,12 +116,12 @@ if (isset($_POST['submit'])) {
               while ($row1 = mysqli_fetch_array($query1)) {
               ?>
           </div>
-
           <div class="row">
             <div class="form-area px-lg-5 mx-lg-5">
+              <hr>
               <form action="" method="POST" enctype="multipart/form-data">
                 <br style="clear: both">
-                <h3 class="text-center"> EDIT YOUR FOOD ITEMS HERE </h3>
+                <h3 class="text-center">EDIT FOOD ITEM</h3>
 
                 <label class="text-danger mb-3"><span> <?php echo $error; ?> </span></label>
 
@@ -130,17 +131,17 @@ if (isset($_POST['submit'])) {
 
                 <div class="form-group mb-3">
                   <label for="dname"><span class="text-danger me-2">*</span> Food Name: </label>
-                  <input type="text" class="form-control" id="dname" name="dname" value=<?php echo $row1['name'];  ?> placeholder="Your Food name" required="">
+                  <input type="text" class="form-control" id="dname" name="dname" value="<?php echo $row1['name'];  ?>" placeholder="Your Food name" required="">
                 </div>
 
                 <div class="form-group mb-3">
                   <label for="dprice"><span class="text-danger me-2">*</span> Food Price: </label>
-                  <input type="text" class="form-control" id="dprice" name="dprice" value=<?php echo $row1['price'];  ?> placeholder="Your Food Price (INR)" required="">
+                  <input type="number" class="form-control" id="dprice" name="dprice" value=<?php echo $row1['price'];  ?> placeholder="Your Food Price (INR)" required="">
                 </div>
 
                 <div class="form-group mb-3">
                   <label for="ddescription"><span class="text-danger me-2">*</span> Food Description: </label>
-                  <input type="text" class="form-control" id="ddescription" name="ddescription" value=<?php echo $row1['description'];  ?> placeholder="Your Food Description" required="">
+                  <input type="text" class="form-control" id="ddescription" name="ddescription" value="<?php echo $row1['description'];  ?>" placeholder="Your Food Description" required="">
                 </div>
 
                 <div class="form-group mb-3">
@@ -150,7 +151,7 @@ if (isset($_POST['submit'])) {
 
                 <div class="form-group mb-3">
                   <label for="dallergens"><span class="text-danger me-2">*</span> Food Allergens: </label>
-                  <input type="text" class="form-control" id="dallergens" name="dallergens" value=<?php echo $row1['allergens'];  ?> placeholder="Allergens" required="">
+                  <input type="text" class="form-control" id="dallergens" name="dallergens" value="<?php echo $row1['allergens'];  ?>" placeholder="Allergens" required="">
                 </div>
 
                 <div class="form-group mb-3">
@@ -176,13 +177,39 @@ if (isset($_POST['submit'])) {
                   <label class="form-label">Days Available</label> <br>
                   <div class="btn-group" role="group">
                     <?php
-                    $query =  "SELECT a.day_id, a.day_name, b.weekly_item_id, b.F_ID FROM week a LEFT JOIN weekly_items b ON a.day_id = b.day_id ORDER BY a.day_id ASC";
+                    $F_ID = $row1['F_ID'];
+                    // $query =  "SELECT a.day_id, a.day_name, b.weekly_item_id, b.F_ID FROM week a LEFT JOIN weekly_items b ON a.day_id = b.day_id ORDER BY a.day_id ASC";
+                    $query = "SELECT * FROM week"; // generate the button group of days
                     $result = $conn->query($query);
-                    if ($result) {
-                      while ($row = mysqli_fetch_array($result)) { ?>
-                        <input type="checkbox" class="btn-check" name="week[]" id="<?php echo $row['day_id'] ?>" value="<?php echo $row['day_id'] ?>" autocomplete="off" <?php if ($row['weekly_item_id'] !== null) echo 'checked' ?>>
-                        <label class="btn btn-outline-secondary" for="<?php echo $row['day_id'] ?>"><?php echo $row['day_name'] ?></label>
-                    <?php }
+
+                    $query2 = "SELECT * FROM weekly_items WHERE F_ID = $F_ID"; //get the days food item is available
+                    //$query2 = "SELECT a.day_id, b.weekly_item_id, b.F_ID FROM week a LEFT JOIN weekly_items b ON a.day_id = b.day_id WHERE F_ID = $F_ID";
+                    $result2 = $conn->query($query2);
+
+                    if ($result && $result2) {
+                      while ($row2 = mysqli_fetch_assoc($result)) { ?>
+                          <input type="checkbox" class="btn-check" name="week[]" 
+                          id="<?php echo $row2['day_id']; ?>" 
+                          value="<?php echo $row2['day_id']; ?>" autocomplete="off" 
+                          <?php 
+                          
+                            while ($row3 = mysqli_fetch_assoc($result2)) {
+                              if ($row2['day_id'] === $row3['day_id']) {
+
+                              }
+
+                              // if (in_array($row2['day_id'], $row3))
+                              // {
+                              //   echo ' checked';
+                              //   break ;
+                              // }
+
+                              // echo ' not this day';
+                            }
+                          
+                           ?>>
+                          <label class="btn btn-outline-secondary" for="<?php echo $row2['day_id'] ?>"><?php echo $row2['day_name']; ?></label>
+                    <?php     
                     }
                     ?>
                   </div>
@@ -195,6 +222,7 @@ if (isset($_POST['submit'])) {
           <?php
               }
             }
+          }
           ?>
             </div>
           </div>

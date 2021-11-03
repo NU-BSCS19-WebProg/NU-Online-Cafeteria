@@ -1,5 +1,5 @@
 <?php
-session_start();
+include("utils/session_u.php");
 include("common/website_info.php");
 include("common/head_scripts.php");
 include("common/components.php");
@@ -8,6 +8,12 @@ if (!isset($_SESSION['login_user2'])) {
   header("location: customerlogin.php");
 }
 
+$currentDay = date('D');
+$query = "SELECT * FROM week WHERE day_name = '$currentDay';";
+$result = $conn->query($query);
+$day_id = mysqli_fetch_array($result)['day_id'];
+
+//header("Location: foodlist.php?day=" . $day_id);
 ?>
 <html>
 <?= head("Food Zone") ?>
@@ -63,12 +69,12 @@ if (!isset($_SESSION['login_user2'])) {
       <!-- FOOD BY WEEK ROW -->
       <div class="row days-container text-center justify-content-center pb-5">
         <div class="col-md-7 d-flex justify-content-between">
-          <span class="day-item active"><a href="" class="btn day">MON</a></span>
-          <a href="" class="btn day">TUE</a>
-          <a href="" class="btn day">WED</a>
-          <a href="" class="btn day">THUR</a>
-          <a href="" class="btn day">SAT</a>
-          <a href="" class="btn day">SUN</a>
+          <?php while ($week = mysqli_fetch_array($result)) { ?>
+            <span class="day-item" <?php //if ($_GET['day_id'] === $week['day_id']) echo 'active' ?>>
+              <a href="foodlist.php?day_id=<?php echo $week['day_id'] ?>" class="btn day"><?php echo $week['day_name'] ?>
+              </a>
+            </span>
+          <?php } ?>
         </div>
       </div>
 
@@ -99,8 +105,8 @@ if (!isset($_SESSION['login_user2'])) {
                     <li class="list-group-item text-center">
                       <p class="card-text"><?php echo $row["description"]; ?></p>
                     </li>
-                    <li class="list-group-item">50 kcal (placeholder)</li>
-                    <li class="list-group-item">Allergens: Milk, Peanuts (placeholder)</li>
+                    <li class="list-group-item"><?php echo $row["calories"]; ?> kcal</li>
+                    <li class="list-group-item">Allergens: <?php echo $row["allergens"]; ?></li>
                     <li class="list-group-item">
                       <h4>&#8369; <?php echo $row["price"]; ?></h4>
                     </li>
