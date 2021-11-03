@@ -14,11 +14,12 @@ if (isset($_POST['submit'])) {
   $name = $conn->real_escape_string($_POST['name']);
   $price = $conn->real_escape_string($_POST['price']);
   $description = $conn->real_escape_string($_POST['description']);
+  $calories = $conn->real_escape_string($_POST['calories']);
+  $allergens = $_POST['allergens'];
 
   $target_dir = "images/";
   $target_file = $target_dir . basename($_FILES["image"]["name"]);
   $uploadOk = 1;
-  $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
   // Check if image file is a actual image or fake image
   $check = getimagesize($_FILES["image"]["tmp_name"]);
@@ -26,12 +27,6 @@ if (isset($_POST['submit'])) {
     $uploadOk = 1;
   } else {
     $error = "File is not an image.";
-    $uploadOk = 0;
-  }
-
-  // Check if file already exists
-  if (file_exists($target_file)) {
-    $error = "Sorry, file already exists.";
     $uploadOk = 0;
   }
 
@@ -47,16 +42,30 @@ if (isset($_POST['submit'])) {
 
       $images_path = $target_file;
 
-      $query = "INSERT INTO FOOD(name,price,description,R_ID,images_path) VALUES('" . $name . "','" . $price . "','" . $description . "','" . $R_ID . "','" . $images_path . "')";
+      //saving into food table
+      $query = "INSERT INTO FOOD(name,price,description, calories, allergens,R_ID,images_path) VALUES('" . $name . "','" . $price . "','" . $description . "','" . $calories . "','" . $allergens . "','" . $R_ID . "','" . $images_path . "')";
       $success = $conn->query($query);
 
       if (!$success) {
         $error = ("Couldnt enter data: " . $conn->error);
       } else {
+        //food item is saved in table, now save the food in the weekly items based on checked days available
+        if (!empty($_POST['week'])) {
+          //get the last inserted food item
+          $query = "SELECT * FROM FOOD ORDER BY F_ID DESC LIMIT 1;";
+          $result = $conn->query($query);
+          $F_ID = mysqli_fetch_array($result)['F_ID'];
+
+          foreach ($_POST['week'] as $id) {
+            //saving into weekly items table
+            $query = "INSERT INTO weekly_items (day_id, F_ID) VALUES ($id, $F_ID)";
+            $success = $conn->query($query);
+          }
+        }
         $response = "success";
       }
     } else {
-      $error = "Sorry, there was an error uploading your file.";
+      $error = "Sorry, there was an error uploading your image.";
     }
   }
 }
@@ -115,10 +124,36 @@ if (isset($_POST['submit'])) {
               </div>
 
               <div class="form-group mb-3">
-                <!-- <input type="text" class="form-control" id="images_path" name="images_path" placeholder="Your Food Image Path [images/<filename>.<extention>]" required=""> -->
-                <input type="file" class="form-control" id="image" name="image" value="Select Image" required="">
+                <input type="number" class="form-control" id="calories" name="calories" placeholder="Calories" required="">
               </div>
 
+              <div class="form-group mb-3">
+                <input type="text" class="form-control" id="allergens" name="allergens" placeholder="Allergens" required="">
+              </div>
+
+              <div class="form-group mb-3">
+                <!-- <input type="text" class="form-control" id="images_path" name="images_path" placeholder="Your Food Image Path [images/<filename>.<extention>]" required=""> -->
+                <div class="input-group">
+                  <label class="input-group-text" for="image"><span class="bi-camera-fill"></span></label>
+                  <input type="file" class="form-control" id="image" name="image" required="">
+                </div>
+              </div>
+
+              <div class="form-group mb-3">
+                <label class="form-label">Days Available</label> <br>
+                <div class="btn-group" role="group">
+                  <?php
+                  $query =  "SELECT * FROM week";
+                  $result = $conn->query($query);
+                  if ($result) {
+                    while ($row = mysqli_fetch_array($result)) { ?>
+                      <input type="checkbox" class="btn-check" name="week[]" id="<?php echo $row['day_id'] ?>" value="<?php echo $row['day_id'] ?>" autocomplete="off">
+                      <label class="btn btn-outline-secondary" for="<?php echo $row['day_id'] ?>"><?php echo $row['day_name'] ?></label>
+                  <?php }
+                  }
+                  ?>
+                </div>
+              </div>
               <div class="form-group mb-3">
                 <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">ADD FOOD</button>
               </div>
