@@ -14,11 +14,9 @@ include("common/components.php");
 
     <main>
         <div class="container">
+            <h1>Past Orders</h1>
             <div class="row">
-                <h1>Active Orders</h1>
-            </div>
-            <div>
-                <h1>Past Orders</h1>
+
             </div>
         </div>
     </main>

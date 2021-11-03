@@ -150,8 +150,8 @@ if (isset($_POST['submit'])) {
                 </div>
 
                 <div class="form-group mb-3">
-                  <label for="dallergens"><span class="text-danger me-2">*</span> Food Allergens: </label>
-                  <input type="text" class="form-control" id="dallergens" name="dallergens" value="<?php echo $row1['allergens'];  ?>" placeholder="Allergens" required="">
+                  <label for="dallergens">Food Allergens: </label>
+                  <input type="text" class="form-control" id="dallergens" name="dallergens" value="<?php echo $row1['allergens'];  ?>" placeholder="Allergens" >
                 </div>
 
                 <div class="form-group mb-3">

@@ -12,7 +12,7 @@ else
 $username=$_POST['username'];
 $password=$_POST['password'];
 // Establishing Connection with Server by passing server_name, user_id and password as a parameter
-require_once 'connection.php';
+require 'connection.php';
 $conn = Connect();
 
 include("getCurrentDay.php");

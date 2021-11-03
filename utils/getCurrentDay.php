@@ -1,7 +1,7 @@
 <?php
 function setDayIDURL()
 {
-    require_once("connection.php");
+    include_once("connection.php");
     $conn = Connect();
 
     $currentDay = date('D');

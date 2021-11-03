@@ -12,6 +12,7 @@ function navbar($page)
 {
   include("website_info.php");
   include("utils/getCurrentDay.php");
+  include("utils/cart_count.php");
 
   echo '<nav class="navbar navbar-expand-lg" role="navigation">
     <div class="container">
@@ -57,11 +58,13 @@ function navbar($page)
         <li class="nav-item"><a href="cart.php" class="nav-link';
     if ($page === "cart") echo ' active';
     echo '"><span class="bi-cart-fill"></span> Cart (';
-    if (isset($_SESSION["cart"])) {
-      $count = count($_SESSION["cart"]);
-      echo "$count";
-    } else
-      echo "0";
+    echo getCartCount();
+
+    // if (isset($_SESSION["cart"])) {
+    //   $count = count($_SESSION["cart"]);
+    //   echo "$count";
+    // } else
+    //   echo "0";
     echo ')
             </a></li>
         <li class="nav-item"><a href="utils/logout_u.php" class="nav-link"><span class="bi-box-arrow-left"></span> Log Out </a></li>
