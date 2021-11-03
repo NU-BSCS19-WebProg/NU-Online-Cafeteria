@@ -53,8 +53,8 @@ $r_image = "images/burger.jpg";
                 $query = "SELECT day_id FROM week WHERE day_name = '$currentDay' LIMIT 1";
                 $day_id = $conn->query($query)->fetch_array()['day_id'];
 
-                //$query = "SELECT * FROM FOOD WHERE R_ID = $R_ID AND options = 'ENABLE' ORDER BY F_ID";
-                $query = "SELECT a.*, b.* FROM food a LEFT JOIN weekly_items b ON a.F_ID = b.F_ID WHERE R_ID = 1 AND options = 'ENABLE' ORDER BY a.F_ID";
+                $query = "SELECT * FROM FOOD WHERE R_ID = $R_ID AND options = 'ENABLE' ORDER BY F_ID";
+                //$query = "SELECT a.*, b.* FROM food a LEFT JOIN weekly_items b ON a.F_ID = b.F_ID WHERE R_ID = 1 AND options = 'ENABLE' ORDER BY a.F_ID";
                 $result = $conn->query($query);
 
                 if ($result && mysqli_num_rows($result) > 0) {
@@ -83,13 +83,15 @@ $r_image = "images/burger.jpg";
                                         <input type="hidden" name="hidden_name" value="<?php echo $row["name"]; ?>">
                                         <input type="hidden" name="hidden_price" value="<?php echo $row["price"]; ?>">
                                         <input type="hidden" name="hidden_RID" value="<?php echo $row["R_ID"]; ?>">
+                                        <input type="submit" name="add" class="btn btn-success" value="Add to Cart">
 
-                                        <?php
+                                        
+                                        <!-- <?php
                                         if ($row['day_id'] === null || $row['day_id'] !== $day_id) { ?>
                                             <input type="submit" name="add" class="btn btn-success" disabled value="Not available today">
                                         <?php } else { ?>
                                             <input type="submit" name="add" class="btn btn-success" value="Add to Cart">
-                                        <?php } ?>
+                                        <?php } ?> -->
 
 
                                     </div>
@@ -98,7 +100,7 @@ $r_image = "images/burger.jpg";
                         </div>
                 <?php }
                 } else {
-                    echo 'no items';
+                    echo '<h5>No items available</h5>';
                 }
 
                 ?>
