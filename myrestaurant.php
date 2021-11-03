@@ -82,10 +82,12 @@ if (isset($_POST['submit'])) {
         </div>
         <!-- End admin sidebar -->
 
-        <!-- ======= Restaurant Info ======= -->
+        <!-- ======= Restaurant ======= -->
         <div class="col-md-8">
           <div class="form-area px-lg-5 mx-lg-5">
             <h3 class="text-center mb-4">MY RESTAURANT</h3>
+
+            <!-- ======= Restaurant Info ======= -->
             <?php if ($hasRestaurant === true) { ?>
               <table class="table table-striped">
                 <tbody>
@@ -111,7 +113,11 @@ if (isset($_POST['submit'])) {
                   </tr>
                 </tbody>
               </table>
+              <!-- End restaurant info -->
+
             <?php } else { ?>
+
+              <!-- ======= Restaurant Create form ======= -->
               <form action="" method="POST">
                 <br style="clear: both">
 
@@ -137,10 +143,11 @@ if (isset($_POST['submit'])) {
                   <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right"> ADD RESTAURANT </button>
                 </div>
               </form>
+              <!-- End restaurant create form -->
             <?php } ?>
           </div>
         </div>
-        <!-- End restaurant info -->
+        <!-- End restaurant -->
       </div>
     </div>
   </main>

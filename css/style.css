@@ -2,6 +2,7 @@
 
 :root {
   --main-blue: rgb(48, 64, 136);
+  --main-yellow: rgb(255, 187, 0);
 }
 
 /*--------------------------------------------------------------
@@ -36,7 +37,7 @@ main {
   z-index: 99;
   border: none;
   outline: none;
-  background-color: gold;
+  background-color: var(--main-yellow);
   color: white;
   cursor: pointer;
   padding: 15px;
@@ -55,6 +56,11 @@ main {
 .modal .btn a {
   text-decoration: none;
   color: #fff !important;
+}
+
+main a {
+  font-weight: 700;
+  color: var(--main-blue);
 }
 
 /*--------------------------------------------------------------
@@ -96,7 +102,7 @@ main {
 
 .nav-link:focus,
 .nav-link:hover {
-  color: rgb(255, 174, 0);
+  color: var(--main-yellow);
 }
 
 .navbar-toggler-icon > i {
@@ -155,13 +161,13 @@ body.signup {
 }
 
 .landing > main .btn {
-  background-color: gold;
+  background-color: var(--main-yellow);
   border: none;
   color: rgb(71, 43, 23);
 }
 
 .landing > main .btn:hover {
-  background-color: rgb(197, 170, 13);
+  background-color: rgb(199, 146, 0);;
 }
 
 /*--------------------------------------------------------------
@@ -225,7 +231,7 @@ body.signup {
 }
 
 .menu-heading h6 {
-  color: rgb(255, 187, 0);
+  color: var(--main-yellow);
   font-weight: 700;
 }
 
@@ -236,7 +242,7 @@ body.signup {
 }
 
 .btn.day:hover {
-  background-color: rgb(255, 187, 0);
+  background-color: var(--main-yellow);
 }
 
 .btn.day:active,
@@ -255,11 +261,11 @@ footer {
   width: 100%;
   background-color: var(--main-blue);
   color: #fff;
-  padding-top: 5rem;
+  padding-top: 6rem;
 }
 
 footer .brand a {
-  font-size: 2rem !important;
+  font-size: 1.6rem !important;
   font-weight: 700;
   /* color: gold !important; */
   color: #fff;
