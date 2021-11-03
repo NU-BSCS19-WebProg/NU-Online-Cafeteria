@@ -12,8 +12,10 @@ else
 $username=$_POST['username'];
 $password=$_POST['password'];
 // Establishing Connection with Server by passing server_name, user_id and password as a parameter
-require 'connection.php';
+require_once 'connection.php';
 $conn = Connect();
+
+include("getCurrentDay.php");
 
 // SQL query to fetch information of registerd users and finds user match.
 $query = "SELECT username, password FROM CUSTOMER WHERE username=? AND password=? LIMIT 1";
@@ -28,7 +30,7 @@ $stmt -> store_result();
 if ($stmt->fetch())  
 {
 	$_SESSION['login_user2']=$username; // Initializing Session
-	header("location: foodlist.php"); // Redirecting To Other Page
+	header("location: foodlist.php?id=".setDayIDURL()); // Redirecting To Other Page
 } else {
 $error = "Username or Password is invalid";
 }

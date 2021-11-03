@@ -60,7 +60,7 @@ if (!isset($_SESSION['login_user2'])) {
               </tr>
             </table>
             <?php
-            echo '<a href="cart.php?action=empty"><button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Empty Cart</button></a>&nbsp;<a href="foodlist.php"><button class="btn btn-warning">Continue Shopping</button></a>&nbsp;<a href="payment.php"><button class="btn btn-success pull-right"><span class="glyphicon glyphicon-share-alt"></span> Check Out</button></a>';
+            echo '<a href="cart.php?action=empty"><button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Empty Cart</button></a>&nbsp;<a href="foodlist.php?id='.setDayIDURL().'"><button class="btn btn-warning">Continue Shopping</button></a>&nbsp;<a href="payment.php"><button class="btn btn-success pull-right"><span class="glyphicon glyphicon-share-alt"></span> Check Out</button></a>';
             ?>
 
           <?php
@@ -69,7 +69,7 @@ if (!isset($_SESSION['login_user2'])) {
           ?>
             <div class="container">
               <h1>Your Shopping Cart</h1>
-              <p>The cart is empty. Go back and <a href="foodlist.php">order now.</a></p>
+              <p>The cart is empty. Go back and <a href="foodlist.php?id=<?php setDayIDURL() ?>">order now.</a></p>
             </div>
           <?php
         }

@@ -11,6 +11,7 @@ function toTopBtn()
 function navbar($page)
 {
   include("website_info.php");
+  include("utils/getCurrentDay.php");
 
   echo '<nav class="navbar navbar-expand-lg" role="navigation">
     <div class="container">
@@ -50,7 +51,7 @@ function navbar($page)
     echo '"><span class="bi-person-fill"></span> Welcome ';
     echo $_SESSION['login_user2'];
     echo '</a></li>
-        <li class="nav-item"><a href="foodlist.php" class="nav-link';
+        <li class="nav-item"><a href="foodlist.php?id='.setDayIDURL().'" class="nav-link';
     if ($page === "foodlist") echo ' active';
     echo '"><span class="fa fa-cutlery"></span> Food Zone </a></li>
         <li class="nav-item"><a href="cart.php" class="nav-link';

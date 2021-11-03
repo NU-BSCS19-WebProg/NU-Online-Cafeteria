@@ -29,9 +29,9 @@ if (!isset($login_session)) {
               <?php
               // Storing Session
               $user_check = $_SESSION['login_user1'];
-              $sql = "SELECT * FROM orders o WHERE o.R_ID IN (SELECT r.R_ID FROM RESTAURANTS r WHERE r.M_ID='$user_check') ORDER BY order_date";
+              $sql = "SELECT * FROM order_items o WHERE o.R_ID IN (SELECT r.R_ID FROM RESTAURANTS r WHERE r.M_ID='$user_check') ORDER BY date_placed";
               $result = mysqli_query($conn, $sql);
-              if (mysqli_num_rows($result) > 0) {
+              if ($result && mysqli_num_rows($result) > 0) {
               ?>
 
                 <table class="table table-striped">

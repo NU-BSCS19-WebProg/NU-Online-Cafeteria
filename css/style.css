@@ -17,6 +17,10 @@ h6 {
   font-family: "Poppins", sans-serif;
 }
 
+h1 {
+  font-weight: 700;
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -167,7 +171,7 @@ body.signup {
 }
 
 .landing > main .btn:hover {
-  background-color: rgb(199, 146, 0);;
+  background-color: rgb(199, 146, 0);
 }
 
 /*--------------------------------------------------------------
@@ -235,6 +239,23 @@ body.signup {
   font-weight: 700;
 }
 
+.restaurant-card div {
+  overflow: hidden;
+}
+
+.restaurant-card a {
+  color: black;
+  text-decoration: none;
+}
+
+.restaurant-card a img {
+  transition: linear 0.2s;
+}
+
+.restaurant-card a img:hover {
+  transform: scale(1.05);
+}
+
 .btn.day,
 .day-item {
   border: none;
@@ -250,8 +271,17 @@ body.signup {
   background-color: rgb(241, 241, 255);
 }
 
-.food-grid .card {
-  box-shadow: 0px 6px 11px 0px rgba(0, 2, 136, 0.123);
+
+/*--------------------------------------------------------------
+# RESTAURANT
+--------------------------------------------------------------*/
+.restaurant.jumbotron {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+  background-attachment: fixed !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
 }
 
 /*--------------------------------------------------------------
