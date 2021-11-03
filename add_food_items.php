@@ -20,7 +20,6 @@ if (isset($_POST['submit'])) {
   $target_dir = "images/";
   $target_file = $target_dir . basename($_FILES["image"]["name"]);
   $uploadOk = 1;
-  $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
   // Check if image file is a actual image or fake image
   $check = getimagesize($_FILES["image"]["tmp_name"]);
@@ -66,7 +65,7 @@ if (isset($_POST['submit'])) {
         $response = "success";
       }
     } else {
-      $error = "Sorry, there was an error uploading your file.";
+      $error = "Sorry, there was an error uploading your image.";
     }
   }
 }
