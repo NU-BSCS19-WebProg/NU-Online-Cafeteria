@@ -29,7 +29,8 @@ if (!isset($login_session)) {
               <?php
               // Storing Session
               $user_check = $_SESSION['login_user1'];
-              $sql = "SELECT * FROM order_items o WHERE o.R_ID IN (SELECT r.R_ID FROM RESTAURANTS r WHERE r.M_ID='$user_check') ORDER BY date_placed";
+              // $sql = "SELECT * FROM order_items o WHERE o.R_ID IN (SELECT r.R_ID FROM RESTAURANTS r WHERE r.M_ID='$user_check') ORDER BY date_placed";
+              $sql = "SELECT o.*, b.paid FROM order_items o JOIN orders b ON o.O_ID = b.O_ID WHERE o.R_ID IN (SELECT r.R_ID FROM RESTAURANTS r WHERE r.M_ID='$user_check') AND b.paid = 1;";
               $result = mysqli_query($conn, $sql);
               if ($result && mysqli_num_rows($result) > 0) {
               ?>
@@ -40,7 +41,7 @@ if (!isset($login_session)) {
                       <th> </th>
                       <th> Order ID </th>
                       <th> Food ID </th>
-                      <th> Order Date </th>
+                      <!-- <th> Order Date </th> -->
                       <th> Food Name </th>
                       <th> Price </th>
                       <th> Quantity </th>
@@ -55,14 +56,15 @@ if (!isset($login_session)) {
 
                     <tbody>
                       <tr>
-                        <td> <span class="glyphicon glyphicon-menu-right"></span> </td>
-                        <td><?php echo $row["order_ID"]; ?></td>
+                        <td> <span class="bi-menu-right"></span> </td>
+                        <td><?php echo $row["O_ID"]; ?></td>
                         <td><?php echo $row["F_ID"]; ?></td>
-                        <td><?php echo $row["order_date"]; ?></td>
+                        <!-- <td><?php echo $row["order_date"]; ?></td> -->
                         <td><?php echo $row["foodname"]; ?></td>
                         <td><?php echo $row["price"]; ?></td>
                         <td><?php echo $row["quantity"]; ?></td>
                         <td><?php echo $row["username"]; ?></td>
+
                       </tr>
                     </tbody>
 
