@@ -11,12 +11,7 @@ function getUserOrderID()
 
     if (mysqli_num_rows($result) === 0) { // no unpaid order for user/all orders from user is paid
         $query = "INSERT INTO orders (username, date_placed, total_price, pick_up_time, paid, picked_up) VALUES ('$username', $date, 0, $date, 0, 0)"; //create or open a new order
-        $result = mysqli_query($conn, $query);
-        if ($result) {
-            echo 'success create';
-        } else {
-            echo $conn->error;
-        }
+        mysqli_query($conn, $query);
     }
 
     //get the id of the order
