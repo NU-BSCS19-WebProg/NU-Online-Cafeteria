@@ -11,8 +11,8 @@ function toTopBtn()
 function navbar($page)
 {
   include("website_info.php");
-  include("utils/getCurrentDay.php");
-  include("utils/cart_count.php");
+  include_once("utils/getCurrentDay.php");
+  include_once("utils/cart_count.php");
 
   echo '<nav class="navbar navbar-expand-lg" role="navigation">
     <div class="container">

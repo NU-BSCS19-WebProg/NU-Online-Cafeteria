@@ -15,7 +15,7 @@ $password=$_POST['password'];
 require 'connection.php';
 $conn = Connect();
 
-include("getCurrentDay.php");
+require_once("getCurrentDay.php");
 
 // SQL query to fetch information of registerd users and finds user match.
 $query = "SELECT username, password FROM CUSTOMER WHERE username=? AND password=? LIMIT 1";

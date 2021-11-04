@@ -2,7 +2,7 @@
 session_start();
 include("common/website_info.php");
 include("common/head_scripts.php");
-include("common/components.php");
+include_once("common/components.php");
 require_once("utils/connection.php");
 ?>
 
