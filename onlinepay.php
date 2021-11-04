@@ -1,14 +1,12 @@
 <?php
 session_start();
+require("utils/session_u.php");
 include("common/head_scripts.php");
 include("common/components.php");
 
-require 'utils/connection.php';
-$conn = Connect();
-if (!isset($_SESSION['login_user2']) || !isset($_SESSION['cart'])) {
+if (!isset($_SESSION['login_user2'])) {
   header("location: customerlogin.php");
 }
-
 ?>
 
 <html>
@@ -86,7 +84,17 @@ if (!isset($_SESSION['login_user2']) || !isset($_SESSION['cart'])) {
                     <a href="payment.php"><input type="submit" class="btn btn-danger btn-block" value="CANCEL" required="" /></a>
                   </div>
                   <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust">
-                    <a href="COD.php"><input type="submit" class="btn btn-success btn-block" value="PAY NOW" required="" /></a>
+                    <?php
+                    if (isset($_POST)) {
+                      $hidden_total = $_POST['hidden_total'];
+                      $hidden_oid = $_POST['hidden_oid'];
+                    }
+                    ?>
+                    <form action="COD.php" method="POST">
+                      <input type="hidden" name="hidden_total" value="<?php echo $hidden_total ?>">
+                      <input type="hidden" name="hidden_oid" value="<?php echo $hidden_oid ?>">
+                      <input type="submit" class="btn btn-success btn-block" value="PAY NOW">
+                    </form>
                   </div>
                 </div>
 
