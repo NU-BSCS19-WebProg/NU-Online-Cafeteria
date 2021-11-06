@@ -30,12 +30,6 @@ if ($result && mysqli_num_rows($result) > 0) {
   }
 }
 
-if (isset($_GET['action'])) {
-  if ($_GET['action'] === 'edit') {
-    $isEdit = true;
-  } else if ($_GET['action'] === 'delete') {
-  }
-}
 
 // creation of new restaurant
 if (isset($_POST['submit'])) {
@@ -48,7 +42,7 @@ if (isset($_POST['submit'])) {
   $target_dir = "images/";
   $uploadOk = 1;
 
-  if ($isEdit) { //is editing restaurant
+  if (isset($_GET['action']) && $_GET['action'] === 'edit') { //is editing restaurant
     if ($_FILES['image']['name'] == "") { //if image is left unchanged
       $target_file = $_POST['old_image'];
       $query = "UPDATE restaurants set name = '$name', email = '$email', contact='$email', address='$email', images_path='$target_file' WHERE R_ID = '$r_id'";
@@ -79,8 +73,9 @@ if (isset($_POST['submit'])) {
     if (!$success) {
       $error = ("Couldnt enter data: " . $conn->error);
     } else {
-      $response = "success";
+      $response = "edited";
     }
+
   } else { //is adding a new restaurant
     // Check if image file is a actual image or fake image
     $check = getimagesize($_FILES["image"]["tmp_name"]);
@@ -108,15 +103,6 @@ if (isset($_POST['submit'])) {
         $error = "Sorry, there was an error uploading your image.";
       }
     }
-
-    // $query = "INSERT INTO RESTAURANTS(name,email,contact,address,M_ID) VALUES('" . $name . "','" . $email . "','" . $contact . "','" . $address . "','" . $_SESSION['login_user1'] . "')";
-    // $success = $conn->query($query);
-
-    // if (!$success) {
-    //   $error = ("Couldnt enter data: " . $conn->error);
-    // } else {
-    //   $response = "success";
-    // }
   }
 }
 ?>
@@ -148,6 +134,24 @@ if (isset($_POST['submit'])) {
       </div>
     </div>
     <!-- End success modal -->
+
+    <!-- ======= Editing Restaurant Success Modal ======= -->
+    <div class="modal fade" id="editedModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-success">Success</h5>
+          </div>
+          <div class="modal-body">
+            <p><?php echo $name ?> has been edited.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary"><a href="myrestaurant.php">Okay</a></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End edited modal -->
 
     <div class="container">
       <div class="row">
@@ -239,7 +243,6 @@ if (isset($_POST['submit'])) {
                 </table>
 
                 <a href="myrestaurant.php?action=edit" class="btn btn-primary"><span class="bi-pencil-fill"></span> Edit Details</a>
-                <a href="myrestaurant.php?action=delete" class="btn btn-danger"><span class="bi-trash-fill"></span> Delete Restaurant</a>
                 <!-- End restaurant info -->
 
               <?php }
@@ -284,9 +287,12 @@ if (isset($_POST['submit'])) {
 
   <script>
     var response = "<?php echo $response ?>";
-    var successModal = new bootstrap.Modal(document.getElementById('successModal'))
+    var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+    var editedModal = new bootstrap.Modal(document.getElementById('editedModal'));
     if (response == "success") {
       successModal.show();
+    } else if (response === "edited") {
+      editedModal.show();
     }
   </script>
 </body>

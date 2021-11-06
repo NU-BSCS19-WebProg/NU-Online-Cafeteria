@@ -18,9 +18,6 @@ if (isset($_GET['r_id'])) {
         die;
     }
 }
-
-//todo: restaurant image
-$r_image = "images/burger.jpg";
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +29,7 @@ $r_image = "images/burger.jpg";
     navbar("foodlist"); ?>
     <main class="pt-0">
         <!-- ====== Header Section ======= -->
-        <div class="restaurant jumbotron" style="background: linear-gradient(90deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('<?php echo $r_image ?>')">
+        <div class="restaurant jumbotron" style="background: linear-gradient(90deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('<?php echo $restaurant['images_path'] ?>')">
             <div class="container text-white">
                 <h1><?php echo $restaurant['name']; ?></h1>
                 <p>
