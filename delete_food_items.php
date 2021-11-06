@@ -25,7 +25,7 @@ if (!isset($login_session)) {
           <div class="form-area px-lg-5 mx-lg-5">
             <form action="delete_food_items1.php" method="POST">
               <br style="clear: both">
-              <h3 class="text-center mb-4">DELETE FOOD ITEMS FROM HERE</h3>
+              <h3 class="text-center mb-4">DELETE FOOD ITEMS</h3>
               <?php
               // Storing Session
               $user_check = $_SESSION['login_user1'];
