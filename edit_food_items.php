@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
   $target_dir = "images/";
   $uploadOk = 1;
 
-  if ($_FILES['image']['name'] == "") {
+  if ($_FILES['image']['name'] == "") { //if image is left unchanged
     $target_file = $_POST['old_image'];
     $query = mysqli_query($conn, "UPDATE food set name='$name', price='$price', calories='$calories', allergens='$allergens', description='$description', images_path='$target_file' where F_ID='$F_ID'");
     $query = "DELETE FROM weekly_items WHERE F_ID = '$F_ID'";
@@ -127,7 +127,7 @@ if (isset($_POST['submit'])) {
                 <div class="row">
                   <div class="col-6">
                     <div class="form-group mb-3">
-                      <label for="image"><span class="text-danger me-2">*</span> Food Image: </label>
+                      <label for="image">Food Image: </label>
                       <figure class="figure">
                         <img src="<?php echo $row1['images_path'];  ?>" alt="old image" class="figure-img img-fluid rounded">
                         <figcaption class="figure-caption">Current food image</figcaption>
@@ -146,22 +146,22 @@ if (isset($_POST['submit'])) {
                     </div>
 
                     <div class="form-group mb-3">
-                      <label for="dname"><span class="text-danger me-2">*</span> Food Name: </label>
+                      <label for="dname">Food Name: </label>
                       <input type="text" class="form-control" id="dname" name="dname" value="<?php echo $row1['name'];  ?>" placeholder="Your Food name" required="">
                     </div>
 
                     <div class="form-group mb-3">
-                      <label for="dprice"><span class="text-danger me-2">*</span> Food Price: </label>
+                      <label for="dprice">Food Price: </label>
                       <input type="number" class="form-control" id="dprice" name="dprice" value=<?php echo $row1['price'];  ?> placeholder="Your Food Price (INR)" required="">
                     </div>
 
                     <div class="form-group mb-3">
-                      <label for="ddescription"><span class="text-danger me-2">*</span> Food Description: </label>
+                      <label for="ddescription">Food Description: </label>
                       <input type="text" class="form-control" id="ddescription" name="ddescription" value="<?php echo $row1['description'];  ?>" placeholder="Your Food Description" required="">
                     </div>
 
                     <div class="form-group mb-3">
-                      <label for="dcalories"><span class="text-danger me-2">*</span> Food Calories: </label>
+                      <label for="dcalories">Food Calories: </label>
                       <input type="number" class="form-control" id="dcalories" name="dcalories" value=<?php echo $row1['calories'];  ?> placeholder="Calories" required="">
                     </div>
 
