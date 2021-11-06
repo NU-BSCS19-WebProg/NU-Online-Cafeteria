@@ -132,7 +132,6 @@ if (isset($_POST['submit'])) {
               </div>
 
               <div class="form-group mb-3">
-                <!-- <input type="text" class="form-control" id="images_path" name="images_path" placeholder="Your Food Image Path [images/<filename>.<extention>]" required=""> -->
                 <div class="input-group">
                   <label class="input-group-text" for="image"><span class="bi-camera-fill"></span></label>
                   <input type="file" class="form-control" id="image" name="image" required="">

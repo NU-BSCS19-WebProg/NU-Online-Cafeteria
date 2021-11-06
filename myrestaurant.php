@@ -10,20 +10,22 @@ if (!isset($login_session)) {
 $error = "";
 $response = "";
 $m_id = $_SESSION['login_user1'];
-$hasRestaurant = false;
+$hasRestaurant = false; // if true, does not show the form for creation of new restaurant
 
 //check first if manager has already created a restaurant for themselves
-$query = "SELECT * FROM restaurants WHERE m_id = '$m_id'";
+$query = "SELECT * FROM restaurants WHERE M_ID = '$m_id'";
 $result = $conn->query($query);
-if (mysqli_num_rows($result) > 0) {
+if ($result && mysqli_num_rows($result) > 0) {
   $hasRestaurant = true;
   $restaurant = mysqli_fetch_assoc($result);
   $r_id = $restaurant['R_ID'];
 
   //check for the total number of menu items in restaurant
-  $query = "SELECT COUNT FROM food WHERE r_id = '$r_id'";
-  $menu_items = $conn->query($query);
-  if (!$menu_items) {
+  $query = "SELECT COUNT(*) FROM food WHERE R_ID = '$r_id'";
+  $result = $conn->query($query);
+  if ($result) {
+    $menu_items = mysqli_fetch_array($result)['0'];
+  } else {
     $menu_items = 0;
   }
 }
