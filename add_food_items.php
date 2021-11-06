@@ -107,7 +107,7 @@ if (isset($_POST['submit'])) {
           <div class="form-area px-lg-5 mx-lg-5">
             <form action="" method="POST" enctype="multipart/form-data">
               <br style="clear: both">
-              <h3 class="text-center mb-4">ADD NEW FOOD ITEM HERE</h3>
+              <h3 class="text-center mb-4">ADD NEW FOOD ITEM</h3>
 
               <label class="text-danger mb-3"><span> <?php echo $error; ?> </span></label>
 
@@ -128,11 +128,10 @@ if (isset($_POST['submit'])) {
               </div>
 
               <div class="form-group mb-3">
-                <input type="text" class="form-control" id="allergens" name="allergens" placeholder="Allergens" required="">
+                <input type="text" class="form-control" id="allergens" name="allergens" placeholder="Allergens">
               </div>
 
               <div class="form-group mb-3">
-                <!-- <input type="text" class="form-control" id="images_path" name="images_path" placeholder="Your Food Image Path [images/<filename>.<extention>]" required=""> -->
                 <div class="input-group">
                   <label class="input-group-text" for="image"><span class="bi-camera-fill"></span></label>
                   <input type="file" class="form-control" id="image" name="image" required="">

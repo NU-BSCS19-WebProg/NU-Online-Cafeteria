@@ -4,6 +4,16 @@ include("common/website_info.php");
 include("common/head_scripts.php");
 include_once("common/components.php");
 require_once("utils/connection.php");
+include_once("utils/getCurrentDay.php");
+
+if (isset($_SESSION['login_user2'])) {
+  header("location: foodlist.php?id=".setDayIDURL());
+} 
+
+if(isset($_SESSION['login_user1'])) {
+  header("location: myrestaurant.php");
+}
+
 ?>
 
 <html>

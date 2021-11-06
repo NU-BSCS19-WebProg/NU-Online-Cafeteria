@@ -76,7 +76,7 @@ if (!isset($_SESSION['login_user2'])) {
             <div class="col-lg-4 col-md-6">
               <a href="restaurant.php?r_id=<?php echo $row1['R_ID'] ?>">
                 <div class="rounded">
-                  <img src="images/burger.jpg" alt="burger" class="rounded img-fluid">
+                  <img src="<?php echo $row1['images_path'] ?>" alt="burger" class="rounded img-fluid">
                   <h5 class="py-2"><strong><?php echo $row1['name'] ?></strong></h5>
                 </div>
               </a>

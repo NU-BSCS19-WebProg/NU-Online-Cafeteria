@@ -29,7 +29,6 @@ if (!isset($login_session)) {
               <?php
               // Storing Session
               $user_check = $_SESSION['login_user1'];
-              // $sql = "SELECT * FROM order_items o WHERE o.R_ID IN (SELECT r.R_ID FROM RESTAURANTS r WHERE r.M_ID='$user_check') ORDER BY date_placed";
               $sql = "SELECT o.*, b.paid FROM order_items o JOIN orders b ON o.O_ID = b.O_ID WHERE o.R_ID IN (SELECT r.R_ID FROM RESTAURANTS r WHERE r.M_ID='$user_check') AND b.paid = 1;";
               $result = mysqli_query($conn, $sql);
               if ($result && mysqli_num_rows($result) > 0) {
@@ -39,13 +38,13 @@ if (!isset($login_session)) {
                   <thead class="thead-dark">
                     <tr>
                       <th> </th>
-                      <th> Order ID </th>
-                      <th> Food ID </th>
-                      <!-- <th> Order Date </th> -->
-                      <th> Food Name </th>
-                      <th> Price </th>
-                      <th> Quantity </th>
-                      <th> Customer </th>
+                      <th>Order ID</th>
+                      <th>Food ID</th>
+                      <th>Food Name</th>
+                      <th>Price</th>
+                      <th>Quantity</th>
+                      <th>Customer</th>
+                      <th>Order Placed</th>
                     </tr>
                   </thead>
 
