@@ -128,7 +128,7 @@ if (isset($_POST['submit'])) {
               </div>
 
               <div class="form-group mb-3">
-                <input type="text" class="form-control" id="allergens" name="allergens" placeholder="Allergens" required="">
+                <input type="text" class="form-control" id="allergens" name="allergens" placeholder="Allergens">
               </div>
 
               <div class="form-group mb-3">
