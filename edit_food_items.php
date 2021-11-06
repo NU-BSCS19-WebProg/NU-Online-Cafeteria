@@ -122,48 +122,16 @@ if (isset($_POST['submit'])) {
               <form action="" method="POST" enctype="multipart/form-data">
                 <br style="clear: both">
                 <h3 class="text-center">EDIT FOOD ITEM</h3>
-
                 <label class="text-danger mb-3"><span> <?php echo $error; ?> </span></label>
-
-                <div class="form-group mb-3">
-                  <input class='input' type='hidden' name="dfid" value=<?php echo $row1['F_ID'];  ?> />
-                </div>
-
-                <div class="form-group mb-3">
-                  <label for="dname"><span class="text-danger me-2">*</span> Food Name: </label>
-                  <input type="text" class="form-control" id="dname" name="dname" value="<?php echo $row1['name'];  ?>" placeholder="Your Food name" required="">
-                </div>
-
-                <div class="form-group mb-3">
-                  <label for="dprice"><span class="text-danger me-2">*</span> Food Price: </label>
-                  <input type="number" class="form-control" id="dprice" name="dprice" value=<?php echo $row1['price'];  ?> placeholder="Your Food Price (INR)" required="">
-                </div>
-
-                <div class="form-group mb-3">
-                  <label for="ddescription"><span class="text-danger me-2">*</span> Food Description: </label>
-                  <input type="text" class="form-control" id="ddescription" name="ddescription" value="<?php echo $row1['description'];  ?>" placeholder="Your Food Description" required="">
-                </div>
-
-                <div class="form-group mb-3">
-                  <label for="dcalories"><span class="text-danger me-2">*</span> Food Calories: </label>
-                  <input type="number" class="form-control" id="dcalories" name="dcalories" value=<?php echo $row1['calories'];  ?> placeholder="Calories" required="">
-                </div>
-
-                <div class="form-group mb-3">
-                  <label for="dallergens">Food Allergens: </label>
-                  <input type="text" class="form-control" id="dallergens" name="dallergens" value="<?php echo $row1['allergens'];  ?>" placeholder="Allergens" >
-                </div>
-
-                <div class="form-group mb-3">
-                  <label for="image"><span class="text-danger me-2">*</span> Food Image: </label>
-                  <div class="row align-items-center">
-                    <div class="col">
+                
+                <div class="row">
+                  <div class="col-6">
+                    <div class="form-group mb-3">
+                      <label for="image"><span class="text-danger me-2">*</span> Food Image: </label>
                       <figure class="figure">
                         <img src="<?php echo $row1['images_path'];  ?>" alt="old image" class="figure-img img-fluid rounded">
                         <figcaption class="figure-caption">Current food image</figcaption>
                       </figure>
-                    </div>
-                    <div class="col">
                       <div class="input-group">
                         <label class="input-group-text" for="image"><span class="bi-camera-fill"></span></label>
                         <input class='input' type='hidden' name="old_image" value=<?php echo $row1['images_path'];   ?> />
@@ -171,22 +139,54 @@ if (isset($_POST['submit'])) {
                       </div>
                     </div>
                   </div>
-                </div>
 
-                <div class="form-group mb-3">
-                  <label class="form-label">Days Available</label> <br>
-                  <div class="btn-group" role="group">
-                    <?php
-                    $F_ID = $row1['F_ID'];
-                    $query = "SELECT a.day_id, a.day_name, b.F_ID FROM week a LEFT OUTER JOIN (SELECT * FROM weekly_items WHERE F_ID = $F_ID) b ON (a.day_id = b.day_id) ORDER BY a.day_id ASC";
-                    $result = $conn->query($query);
-                    if ($result) {
-                      while ($row2 = mysqli_fetch_assoc($result)) { ?>
-                        <input type="checkbox" class="btn-check" name="week[]" id="<?php echo $row2['day_id']; ?>" value="<?php echo $row2['day_id']; ?>" autocomplete="off" <?php if ($row2['F_ID'] !== null) echo ' checked'; ?>>
-                        <label class="btn btn-outline-secondary" for="<?php echo $row2['day_id'] ?>"><?php echo $row2['day_name']; ?></label>
-                      <?php
-                      }
-                      ?>
+                  <div class="col-6">
+                    <div class="form-group mb-3">
+                      <input class='input' type='hidden' name="dfid" value=<?php echo $row1['F_ID'];  ?> />
+                    </div>
+
+                    <div class="form-group mb-3">
+                      <label for="dname"><span class="text-danger me-2">*</span> Food Name: </label>
+                      <input type="text" class="form-control" id="dname" name="dname" value="<?php echo $row1['name'];  ?>" placeholder="Your Food name" required="">
+                    </div>
+
+                    <div class="form-group mb-3">
+                      <label for="dprice"><span class="text-danger me-2">*</span> Food Price: </label>
+                      <input type="number" class="form-control" id="dprice" name="dprice" value=<?php echo $row1['price'];  ?> placeholder="Your Food Price (INR)" required="">
+                    </div>
+
+                    <div class="form-group mb-3">
+                      <label for="ddescription"><span class="text-danger me-2">*</span> Food Description: </label>
+                      <input type="text" class="form-control" id="ddescription" name="ddescription" value="<?php echo $row1['description'];  ?>" placeholder="Your Food Description" required="">
+                    </div>
+
+                    <div class="form-group mb-3">
+                      <label for="dcalories"><span class="text-danger me-2">*</span> Food Calories: </label>
+                      <input type="number" class="form-control" id="dcalories" name="dcalories" value=<?php echo $row1['calories'];  ?> placeholder="Calories" required="">
+                    </div>
+
+                    <div class="form-group mb-3">
+                      <label for="dallergens">Food Allergens: </label>
+                      <input type="text" class="form-control" id="dallergens" name="dallergens" value="<?php echo $row1['allergens'];  ?>" placeholder="Allergens">
+                    </div>
+
+                    <div class="form-group mb-3">
+                      <label class="form-label">Days Available</label> <br>
+                      <div class="btn-group" role="group">
+                        <?php
+                        $F_ID = $row1['F_ID'];
+                        $query = "SELECT a.day_id, a.day_name, b.F_ID FROM week a LEFT OUTER JOIN (SELECT * FROM weekly_items WHERE F_ID = $F_ID) b ON (a.day_id = b.day_id) ORDER BY a.day_id ASC";
+                        $result = $conn->query($query);
+                        if ($result) {
+                          while ($row2 = mysqli_fetch_assoc($result)) { ?>
+                            <input type="checkbox" class="btn-check" name="week[]" id="<?php echo $row2['day_id']; ?>" value="<?php echo $row2['day_id']; ?>" autocomplete="off" <?php if ($row2['F_ID'] !== null) echo ' checked'; ?>>
+                            <label class="btn btn-outline-secondary" for="<?php echo $row2['day_id'] ?>"><?php echo $row2['day_name']; ?></label>
+                        <?php
+                          }
+                        }
+                        ?>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
@@ -194,11 +194,10 @@ if (isset($_POST['submit'])) {
                   <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">UPDATE</button>
                 </div>
               </form>
-        <?php
-                    }
-                  }
-                }
-        ?>
+          <?php
+              }
+            }
+          ?>
             </div>
           </div>
           <?php
