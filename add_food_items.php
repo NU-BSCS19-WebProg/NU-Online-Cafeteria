@@ -107,7 +107,7 @@ if (isset($_POST['submit'])) {
           <div class="form-area px-lg-5 mx-lg-5">
             <form action="" method="POST" enctype="multipart/form-data">
               <br style="clear: both">
-              <h3 class="text-center mb-4">ADD NEW FOOD ITEM HERE</h3>
+              <h3 class="text-center mb-4">ADD NEW FOOD ITEM</h3>
 
               <label class="text-danger mb-3"><span> <?php echo $error; ?> </span></label>
 
