@@ -30,6 +30,10 @@ if ($result && mysqli_num_rows($result) > 0) {
   }
 }
 
+if (isset($_GET['action']) && $_GET['action'] === 'edit') {
+  $isEdit = true;
+}
+
 
 // creation of new restaurant
 if (isset($_POST['submit'])) {
@@ -42,10 +46,10 @@ if (isset($_POST['submit'])) {
   $target_dir = "images/";
   $uploadOk = 1;
 
-  if (isset($_GET['action']) && $_GET['action'] === 'edit') { //is editing restaurant
+  if ($isEdit === true) { //is editing restaurant
     if ($_FILES['image']['name'] == "") { //if image is left unchanged
       $target_file = $_POST['old_image'];
-      $query = "UPDATE restaurants set name = '$name', email = '$email', contact='$email', address='$email', images_path='$target_file' WHERE R_ID = '$r_id'";
+      $query = "UPDATE restaurants set name = '$name', email = '$email', contact='$contact', address='$address', images_path='$target_file' WHERE R_ID = '$r_id'";
       $success = $conn->query($query);
     } else {
       $target_file = $target_dir . basename($_FILES["image"]["name"]);
@@ -62,7 +66,7 @@ if (isset($_POST['submit'])) {
       if ($uploadOk !== 0) {
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
           $images_path = $target_file;
-          $query = "UPDATE restaurants set name = '$name', email = '$email', contact='$email', address='$email', images_path='$images_path' WHERE R_ID = '$r_id'";
+          $query = "UPDATE restaurants set name = '$name', email = '$email', contact='$contact', address='$address', images_path='$images_path' WHERE R_ID = '$r_id'";
           $success = $conn->query($query);
         } else {
           $error = "Sorry, there was an error uploading your image.";

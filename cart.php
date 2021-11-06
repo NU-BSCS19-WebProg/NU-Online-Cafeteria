@@ -138,7 +138,7 @@ $response = "";
     ?>
       <div class="container">
         <div class="row">
-          <div class="col-lg-10">
+          <div class="col-lg-10 col-md-12">
             <h1>Your Shopping Cart</h1>
 
             <table class="table table-striped">
