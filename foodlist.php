@@ -118,13 +118,11 @@ if (!isset($_SESSION['login_user2'])) {
 
       <!-- Display all Food from food table -->
       <?php
-
-      // $sql = "SELECT * FROM FOOD WHERE options = 'ENABLE' ORDER BY F_ID";
       $id = $_GET['id'];
-      $sql = "SELECT a.day_id, b.* FROM weekly_items a, food b WHERE a.F_ID = b.F_ID AND a.day_id = $id AND b.options = 'ENABLE' ORDER BY a.F_ID";
+      $sql = "SELECT a.day_id, b.* FROM weekly_items a, food b WHERE a.F_ID = b.F_ID AND a.day_id = $id ORDER BY a.F_ID";
       $result = mysqli_query($conn, $sql);
 
-      if (mysqli_num_rows($result) > 0) {
+      if ($result && mysqli_num_rows($result) > 0) {
         $count = 0;
 
         while ($row = mysqli_fetch_assoc($result)) {
