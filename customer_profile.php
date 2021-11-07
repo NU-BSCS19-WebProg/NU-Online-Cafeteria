@@ -18,13 +18,13 @@ include("common/components.php");
         <div class="container">
             <h1>Past Orders</h1>
             <div class="row">
-                <table class="table">
+                <table class="table table-bordered table-sm">
                     <thead>
                         <tr>
                             <th>Order ID</th>
                             <th>Items</th>
                             <th>Total Price</th>
-                            <th>Order Placed</th>
+                            <th>Date Placed</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,7 +34,7 @@ include("common/components.php");
                         if ($result && mysqli_num_rows($result) > 0) {
                             while ($row = mysqli_fetch_assoc($result)) { ?>
                                 <tr>
-                                    <td><?php echo $row['O_ID'] ?></td>
+                                    <td><strong><?php echo $row['O_ID'] ?></strong></td>
                                     <td>
                                         <ul>
                                             <?php
@@ -43,7 +43,8 @@ include("common/components.php");
                                             $result2 = $conn->query($query2);
                                             if ($result2 && mysqli_num_rows($result2) > 0) {
                                                 while ($row2 = mysqli_fetch_assoc($result2)) {
-                                                    echo '<li>' . $row2['foodname'] . ' (' . $row2['quantity'] . ')' . '</li>';
+                                                    //echo '<tr><td>' .$row2['foodname'] . ' (' . $row2['quantity'] . ')' . '</td></tr>';
+                                                   echo '<li>' . $row2['foodname'] . ' (' . $row2['quantity'] . ')' . '</li>';
                                                 }
                                             }
                                             ?>
