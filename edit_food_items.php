@@ -152,7 +152,7 @@ if (isset($_POST['submit'])) {
 
                     <div class="form-group mb-3">
                       <label for="dprice">Food Price: </label>
-                      <input type="number" class="form-control" id="dprice" name="dprice" value=<?php echo $row1['price'];  ?> placeholder="Your Food Price (INR)" required="">
+                      <input type="number" min="0" class="form-control" id="dprice" name="dprice" value=<?php echo $row1['price'];  ?> placeholder="Your Food Price (INR)" required="">
                     </div>
 
                     <div class="form-group mb-3">
@@ -162,7 +162,7 @@ if (isset($_POST['submit'])) {
 
                     <div class="form-group mb-3">
                       <label for="dcalories">Food Calories: </label>
-                      <input type="number" class="form-control" id="dcalories" name="dcalories" value=<?php echo $row1['calories'];  ?> placeholder="Calories" required="">
+                      <input type="number" min="0" class="form-control" id="dcalories" name="dcalories" value=<?php echo $row1['calories'];  ?> placeholder="Calories" required="">
                     </div>
 
                     <div class="form-group mb-3">
