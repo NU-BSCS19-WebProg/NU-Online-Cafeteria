@@ -162,6 +162,8 @@ if (!isset($_SESSION['login_user2'])) {
                     <input type="hidden" name="hidden_price" value="<?php echo $row["price"]; ?>">
                     <input type="hidden" name="hidden_RID" value="<?php echo $row["R_ID"]; ?>">
                     <input type="submit" name="add" style="margin-top:5px;" class="btn btn-success" value="Add to Cart">
+                  <?php } else { ?>
+                    <p>Not available today</p>
                   <?php } ?>
                 </div>
               </div>
