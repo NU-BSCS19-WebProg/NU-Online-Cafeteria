@@ -46,16 +46,24 @@ if (isset($_GET['r_id'])) {
             <h2>Food Items</h2>
             <div class="row g-4 py-5">
                 <?php
-                $currentDay = date('D');
-                $query = "SELECT day_id FROM week WHERE day_name = '$currentDay' LIMIT 1";
-                $day_id = $conn->query($query)->fetch_array()['day_id'];
-
                 $query = "SELECT * FROM FOOD WHERE R_ID = $R_ID ORDER BY F_ID";
-                //$query = "SELECT a.*, b.* FROM food a LEFT JOIN weekly_items b ON a.F_ID = b.F_ID WHERE R_ID = 1 AND options = 'ENABLE' ORDER BY a.F_ID";
                 $result = $conn->query($query);
 
                 if ($result && mysqli_num_rows($result) > 0) {
-                    while ($row = mysqli_fetch_assoc($result)) { ?>
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $canOrder = false; //ui that lets user order is dependent on this var
+
+                        $query2 = "SELECT * FROM weekly_items WHERE F_ID =" . $row['F_ID'];
+                        $result2 = $conn->query($query2);
+                        if ($result2 && mysqli_num_rows($result2) > 0) {
+                            while ($row2 = mysqli_fetch_array($result2)) {
+                                if ($row2['day_id'] === setDayIDURL()) {
+                                    $canOrder = true;
+                                    break;
+                                }
+                            }
+                        }
+                ?>
                         <div class="col-md-5 col-lg-3">
                             <form method="post" action="cart.php?action=add&id=<?php echo $row["F_ID"]; ?>">
                                 <div class="card shadow" align="center" ;>
@@ -67,30 +75,29 @@ if (isset($_GET['r_id'])) {
                                                 <p class="card-text"><?php echo $row["description"]; ?></p>
                                             </li>
                                             <li class="list-group-item"><?php echo $row["calories"]; ?> kcal</li>
-                                            <li class="list-group-item">Allergens: <?php if ($row["allergens"] === "") echo "none";
-                                                                                    else echo $row["allergens"]; ?></li>
+                                            <li class="list-group-item">Allergens:
+                                                <?php if ($row["allergens"] === "") echo "none";
+                                                else echo $row["allergens"]; ?>
+                                            </li>
                                             <li class="list-group-item">
                                                 <h4>&#8369; <?php echo $row["price"]; ?></h4>
                                             </li>
-                                            <li class="list-group-item">
-                                                <h5>Quantity: <input type="number" min="1" max="25" name="quantity" class="form-control d-inline-block" value="1" style="width: 60px;"> </h5>
-                                            </li>
+
+                                            <?php if ($canOrder == true) { ?>
+                                                <li class="list-group-item">
+                                                    <h5>Quantity: <input type="number" min="1" max="25" name="quantity" class="form-control d-inline-block" value="1" style="width: 60px;"> </h5>
+                                                </li>
+                                            <?php } ?>
                                         </ul>
 
-                                        <input type="hidden" name="hidden_name" value="<?php echo $row["name"]; ?>">
-                                        <input type="hidden" name="hidden_price" value="<?php echo $row["price"]; ?>">
-                                        <input type="hidden" name="hidden_RID" value="<?php echo $row["R_ID"]; ?>">
-                                        <input type="submit" name="add" class="btn btn-success" value="Add to Cart">
-
-                                        
-                                        <!-- <?php
-                                        if ($row['day_id'] === null || $row['day_id'] !== $day_id) { ?>
-                                            <input type="submit" name="add" class="btn btn-success" disabled value="Not available today">
-                                        <?php } else { ?>
+                                        <?php if ($canOrder == true) { ?>
+                                            <input type="hidden" name="hidden_name" value="<?php echo $row["name"]; ?>">
+                                            <input type="hidden" name="hidden_price" value="<?php echo $row["price"]; ?>">
+                                            <input type="hidden" name="hidden_RID" value="<?php echo $row["R_ID"]; ?>">
                                             <input type="submit" name="add" class="btn btn-success" value="Add to Cart">
-                                        <?php } ?> -->
-
-
+                                        <?php } else { ?>
+                                            <p>Not available today</p>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </form>
