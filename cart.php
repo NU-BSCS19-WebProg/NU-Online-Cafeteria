@@ -184,7 +184,7 @@ $response = "";
             </table>
             <a href="cart.php?action=empty" class="btn btn-danger"><span class="bi-trash"></span> Empty Cart</a>
             <a href="foodlist.php?id=<?php echo setDayIDURL(); ?>" class="btn btn-warning"><span class="bi-shop"></span> Continue Shopping</a>
-            <a href="payment.php?o_id=<?php echo getUserOrderID(); ?>" class="btn btn-success pull-right"><span class="bi-cart-check-fill"></span> Check Out</a>
+            <a href="payment.php" class="btn btn-success pull-right"><span class="bi-cart-check-fill"></span> Check Out</a>
 
           <?php
         }

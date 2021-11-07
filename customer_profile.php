@@ -18,12 +18,13 @@ include("common/components.php");
         <div class="container">
             <h1>Past Orders</h1>
             <div class="row">
-                <table class="table table-striped">
+                <table class="table">
                     <thead>
                         <tr>
                             <th>Order ID</th>
-                            <th>Total Price</th>
                             <th>Items</th>
+                            <th>Total Price</th>
+                            <th>Order Placed</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,7 +35,6 @@ include("common/components.php");
                             while ($row = mysqli_fetch_assoc($result)) { ?>
                                 <tr>
                                     <td><?php echo $row['O_ID'] ?></td>
-                                    <td><?php echo $row['total_price'] ?></td>
                                     <td>
                                         <ul>
                                             <?php
@@ -43,12 +43,14 @@ include("common/components.php");
                                             $result2 = $conn->query($query2);
                                             if ($result2 && mysqli_num_rows($result2) > 0) {
                                                 while ($row2 = mysqli_fetch_assoc($result2)) {
-                                                    echo '<li>' . $row2['foodname'] . '</li>';
+                                                    echo '<li>' . $row2['foodname'] . ' (' . $row2['quantity'] . ')' . '</li>';
                                                 }
                                             }
                                             ?>
                                         </ul>
                                     </td>
+                                    <td>Php <?php echo $row['total_price'] ?></td>
+                                    <td><?php echo $row['date_placed'] ?></td>
                                 </tr>
 
 

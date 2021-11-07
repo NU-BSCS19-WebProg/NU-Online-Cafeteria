@@ -67,6 +67,10 @@ main a {
   color: var(--main-blue);
 }
 
+.table td img {
+  height: 5rem;
+}
+
 /*--------------------------------------------------------------
 # NAVBAR
 --------------------------------------------------------------*/
@@ -273,6 +277,20 @@ body.signup {
 
 
 /*--------------------------------------------------------------
+# PAYMENT
+--------------------------------------------------------------*/
+.payment .radio.btn {
+padding: 1rem;  
+}
+
+.payment .radio.btn > img {
+  height: 3rem;
+}
+
+
+
+
+/*--------------------------------------------------------------
 # RESTAURANT
 --------------------------------------------------------------*/
 .restaurant.jumbotron {
@@ -282,10 +300,6 @@ body.signup {
   background-size: cover !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
-}
-
-.table td img {
-  height: 6rem;
 }
 
 /*--------------------------------------------------------------
