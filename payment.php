@@ -62,10 +62,10 @@ if (isset($_POST["checkout"])) {
       <div class="row pt-3">
         <div class="col-lg-5 shadow p-5 rounded">
           <form action="" method="POST" class="payment">
-            <input type="radio" class="btn-check" name="payment" id="gcash" autocomplete="off">
+            <input type="radio" class="btn-check" name="payment" id="gcash" autocomplete="off" required>
             <label class="radio btn btn-outline-primary border me-2" for="gcash"><img src="images/gcash.png" alt="logo" class="rounded me-2"> Gcash E-Wallet</label>
 
-            <input type="radio" class="btn-check" name="payment" id="paymaya" autocomplete="off">
+            <input type="radio" class="btn-check" name="payment" id="paymaya" autocomplete="off" required>
             <label class="radio btn btn-outline-primary border" for="paymaya"><img src="images/paymaya.png" alt="logo" class="rounded me-2"> Paymaya E-Wallet</label>
 
             <label for="exampleFormControlInput1" class="form-label mt-4">Enter e-wallet number:</label>

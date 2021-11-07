@@ -18,7 +18,7 @@ if (!isset($login_session)) {
   <main>
     <div class="container">
       <div class="row">
-      <div class="col-md-4 text-center">
+        <div class="col-md-4 text-center">
           <?= adminSideBar("orders"); ?>
         </div>
         <div class="col-md-8">
@@ -29,12 +29,12 @@ if (!isset($login_session)) {
               <?php
               // Storing Session
               $user_check = $_SESSION['login_user1'];
-              $sql = "SELECT o.*, b.paid FROM order_items o JOIN orders b ON o.O_ID = b.O_ID WHERE o.R_ID IN (SELECT r.R_ID FROM RESTAURANTS r WHERE r.M_ID='$user_check') AND b.paid = 1;";
+              $sql = "SELECT o.*, b.date_placed, b.paid FROM order_items o JOIN orders b ON o.O_ID = b.O_ID WHERE o.R_ID IN (SELECT r.R_ID FROM RESTAURANTS r WHERE r.M_ID='$user_check')";
               $result = mysqli_query($conn, $sql);
               if ($result && mysqli_num_rows($result) > 0) {
               ?>
 
-                <table class="table table-striped">
+                <table class="table">
                   <thead class="thead-dark">
                     <tr>
                       <th> </th>
@@ -45,6 +45,7 @@ if (!isset($login_session)) {
                       <th>Quantity</th>
                       <th>Customer</th>
                       <th>Order Placed</th>
+                      <th>Paid</th>
                     </tr>
                   </thead>
 
@@ -58,12 +59,14 @@ if (!isset($login_session)) {
                         <td> <span class="bi-menu-right"></span> </td>
                         <td><?php echo $row["O_ID"]; ?></td>
                         <td><?php echo $row["F_ID"]; ?></td>
-                        <!-- <td><?php echo $row["order_date"]; ?></td> -->
                         <td><?php echo $row["foodname"]; ?></td>
                         <td><?php echo $row["price"]; ?></td>
                         <td><?php echo $row["quantity"]; ?></td>
                         <td><?php echo $row["username"]; ?></td>
-
+                        <td><?php echo $row["date_placed"]; ?></td>
+                        <td><?php $isPaid = $row['paid'];
+                            if ($isPaid == 1) echo 'YES';
+                            else echo 'NO'; ?></td>
                       </tr>
                     </tbody>
 

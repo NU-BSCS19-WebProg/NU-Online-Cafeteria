@@ -7,10 +7,8 @@ function getUserOrderID()
     $query = "SELECT * FROM orders WHERE username = '$username' AND paid = 0";
     $result = mysqli_query($conn, $query);
 
-    $date = MYSQLI_TYPE_DATETIME;
-
     if (mysqli_num_rows($result) === 0) { // no unpaid order for user/all orders from user is paid
-        $query = "INSERT INTO orders (username, date_placed, total_price, paid) VALUES ('$username', $date, 0, 0)"; //create or open a new order
+        $query = "INSERT INTO orders (username, date_placed, total_price, paid) VALUES ('$username', CURRENT_TIMESTAMP, 0, 0)"; //create or open a new order
         mysqli_query($conn, $query);
     }
 
