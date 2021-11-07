@@ -124,11 +124,14 @@ if (!isset($_SESSION['login_user2'])) {
 
       if ($result && mysqli_num_rows($result) > 0) {
         $count = 0;
-
         while ($row = mysqli_fetch_assoc($result)) {
+          $canOrder = false; //ui that lets user order is dependent on this var
+          //check if the current real life day is equal to the selected day in the page
+          if ($row['day_id'] === setDayIDURL())
+            $canOrder = true;
+
           if ($count == 0)
             echo "<div class='row py-5 food-grid justify-content-center'>";
-
       ?>
           <div class="col-md-5 col-lg-3">
             <form method="post" action="cart.php?action=add&id=<?php echo $row["F_ID"]; ?>">
@@ -141,20 +144,25 @@ if (!isset($_SESSION['login_user2'])) {
                       <p class="card-text"><?php echo $row["description"]; ?></p>
                     </li>
                     <li class="list-group-item"><?php echo $row["calories"]; ?> kcal</li>
-                    <li class="list-group-item">Allergens: <?php if ($row["allergens"] === "") echo "none";
-                                                            else echo $row["allergens"]; ?></li>
+                    <li class="list-group-item">Allergens:
+                      <?php if ($row["allergens"] === "") echo "none";
+                      else echo $row["allergens"]; ?>
+                    </li>
                     <li class="list-group-item">
                       <h4>&#8369; <?php echo $row["price"]; ?></h4>
                     </li>
-                    <li class="list-group-item">
-                      <h5>Quantity: <input type="number" min="1" max="25" name="quantity" class="form-control d-inline-block" value="1" style="width: 60px;"> </h5>
-                    </li>
+                    <?php if ($canOrder === true) { ?>
+                      <li class="list-group-item">
+                        <h5>Quantity: <input type="number" min="1" max="25" name="quantity" class="form-control d-inline-block" value="1" style="width: 60px;"></h5>
+                      </li>
+                    <?php } ?>
                   </ul>
-
-                  <input type="hidden" name="hidden_name" value="<?php echo $row["name"]; ?>">
-                  <input type="hidden" name="hidden_price" value="<?php echo $row["price"]; ?>">
-                  <input type="hidden" name="hidden_RID" value="<?php echo $row["R_ID"]; ?>">
-                  <input type="submit" name="add" style="margin-top:5px;" class="btn btn-success" value="Add to Cart">
+                  <?php if ($canOrder === true) { ?>
+                    <input type="hidden" name="hidden_name" value="<?php echo $row["name"]; ?>">
+                    <input type="hidden" name="hidden_price" value="<?php echo $row["price"]; ?>">
+                    <input type="hidden" name="hidden_RID" value="<?php echo $row["R_ID"]; ?>">
+                    <input type="submit" name="add" style="margin-top:5px;" class="btn btn-success" value="Add to Cart">
+                  <?php } ?>
                 </div>
               </div>
             </form>
