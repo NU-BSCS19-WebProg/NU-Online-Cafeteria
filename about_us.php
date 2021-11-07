@@ -32,7 +32,6 @@ include("common/components.php");
           <h4>How does it work?</h4>
           <ol>
             <li>Place your order.</li>
-            <li>Select your pick-up time.</li>
             <li>Pay with your preferred method.</li>
             <li>Pick up your food and enjoy!</li>
           </ol>

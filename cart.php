@@ -4,8 +4,6 @@ include('utils/session_u.php');
 include("common/head_scripts.php");
 include("common/components.php");
 
-// require 'utils/connection.php';
-// $conn = Connect();
 if (!isset($_SESSION['login_user2'])) {
   header("location: customerlogin.php");
 }
@@ -132,9 +130,9 @@ $response = "";
   <main>
     <?php
     if (getCartCount() !== 0) {
-      $O_ID = getUserOrderID();
-      $query = "SELECT a.id, a.quantity, b.item_name, b.price FROM order_items a, food_items b WHERE a.O_ID = $O_ID AND a.item_id = b.id";
-      $result = mysqli_query($conn, $query);
+      // $O_ID = getUserOrderID();
+      // $query = "SELECT a.order_item_ID, a.quantity, b.item_name, b.price FROM order_items a, food_items b WHERE a.O_ID = $O_ID AND a.item_id = b.id";
+      // $result = mysqli_query($conn, $query);
     ?>
       <div class="container">
         <div class="row">
@@ -144,31 +142,33 @@ $response = "";
             <table class="table table-striped">
               <thead class="thead-dark">
                 <tr>
-                  <th width="35%">Food Name</th>
-                  <th width="10%">Quantity</th>
-                  <th width="15%">Item Price</th>
-                  <th width="15%">Item(s) Total Price</th>
-                  <th width="15%">Actions</th>
+                  <th>Image</th>
+                  <th>Food Name</th>
+                  <th>Item Price</th>
+                  <th>Quantity</th>
+                  <th>Item(s) Total Price</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <?php
               $total = 0;
-              $query = "SELECT a.order_item_ID, a.quantity, b.F_ID, b.name, a.price FROM order_items a, food b WHERE a.F_ID = b.F_ID AND O_ID = " . getUserOrderID();
-              $result = $conn->query($query);
+              $query = "SELECT a.order_item_ID, a.quantity, b.F_ID, b.name, a.price, b.images_path FROM order_items a, food b WHERE a.F_ID = b.F_ID AND O_ID = " . getUserOrderID();
+              $result = $conn->query($query); 
               if ($result && mysqli_num_rows($result) > 0) {
                 while ($values = mysqli_fetch_assoc($result)) {
               ?>
                   <form action="" method="POST">
                     <tr>
+                      <td><img src="<?php echo $values["images_path"] ?>" alt="food logo" class="rounded"></td>
                       <td><?php echo $values["name"]; ?></td>
-                      <td><input type="number" min="1" max="25" name="quantity" class="form-control d-inline-block" value="<?php echo $values["quantity"] ?>" style="width: 60px;"> </td>
                       <td>&#8369; <?php echo $values["price"]; ?></td>
+                      <td><input type="number" min="1" max="25" name="quantity" class="form-control d-inline-block" value="<?php echo $values["quantity"] ?>" style="width: 60px;"> </td>
                       <td>&#8369; <?php echo number_format($values["quantity"] * $values["price"], 2); ?></td>
                       <input type="hidden" name="hidden_OID" value="<?php echo $values["order_item_ID"]; ?>">
                       <input type="hidden" name="hidden_name" value="<?php echo $values["name"]; ?>">
                       <td class="display-inline">
-                        <input type="submit" name="update" value="update" class="btn btn-success">
-                        <input type="submit" name="delete" value="delete" class="btn btn-danger">
+                        <input type="submit" name="update" value="Update" class="btn btn-success">
+                        <input type="submit" name="delete" value="Delete" class="btn btn-danger">
                       </td>
                     </tr>
                   </form>
@@ -178,14 +178,13 @@ $response = "";
               }
               ?>
               <tr>
-                <td colspan="3" align="right">Total</td>
-                <td align="right">&#8369; <?php echo number_format($total, 2); ?></td>  
-                <td></td>
+                <td colspan="5" align="right">Total</td>
+                <td class="h5">&#8369; <?php echo number_format($total, 2); ?></td>
               </tr>
             </table>
             <a href="cart.php?action=empty" class="btn btn-danger"><span class="bi-trash"></span> Empty Cart</a>
             <a href="foodlist.php?id=<?php echo setDayIDURL(); ?>" class="btn btn-warning"><span class="bi-shop"></span> Continue Shopping</a>
-            <a href="payment.php?o_id=<?php echo getUserOrderID();?>" class="btn btn-success pull-right"><span class="bi-cart-check-fill"></span> Check Out</a>
+            <a href="payment.php" class="btn btn-success pull-right"><span class="bi-cart-check-fill"></span> Check Out</a>
 
           <?php
         }
