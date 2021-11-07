@@ -116,7 +116,7 @@ if (isset($_POST['submit'])) {
               </div>
 
               <div class="form-group mb-3">
-                <input type="number" class="form-control" id="price" name="price" placeholder="Your Food Price (PHP)" required="">
+                <input type="number" min="0" class="form-control" id="price" name="price" placeholder="Your Food Price (PHP)" required="">
               </div>
 
               <div class="form-group mb-3">
@@ -124,7 +124,7 @@ if (isset($_POST['submit'])) {
               </div>
 
               <div class="form-group mb-3">
-                <input type="number" class="form-control" id="calories" name="calories" placeholder="Calories" required="">
+                <input type="number" min="0" class="form-control" id="calories" name="calories" placeholder="Calories" required="">
               </div>
 
               <div class="form-group mb-3">

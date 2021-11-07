@@ -41,12 +41,12 @@ if (isset($_POST['submit'])) {
   $email = $conn->real_escape_string($_POST['email']);
   $contact = $conn->real_escape_string($_POST['contact']);
   $address = $conn->real_escape_string($_POST['address']);
-  $r_id = $restaurant['R_ID'];
 
   $target_dir = "images/";
   $uploadOk = 1;
 
   if ($isEdit === true) { //is editing restaurant
+    $r_id = $restaurant['R_ID'];
     if ($_FILES['image']['name'] == "") { //if image is left unchanged
       $target_file = $_POST['old_image'];
       $query = "UPDATE restaurants set name = '$name', email = '$email', contact='$contact', address='$address', images_path='$target_file' WHERE R_ID = '$r_id'";
@@ -79,8 +79,8 @@ if (isset($_POST['submit'])) {
     } else {
       $response = "edited";
     }
-
   } else { //is adding a new restaurant
+    $target_file = $target_dir . basename($_FILES["image"]["name"]);
     // Check if image file is a actual image or fake image
     $check = getimagesize($_FILES["image"]["tmp_name"]);
     if ($check !== false) {
@@ -255,6 +255,7 @@ if (isset($_POST['submit'])) {
               <!-- ======= Restaurant Create form ======= -->
               <form action="" method="POST" enctype="multipart/form-data">
                 <br style="clear: both">
+
                 <div class="form-group mb-3">
                   <input type="text" class="form-control" id="name" name="name" placeholder="Your Restaurant's Name" required="">
                 </div>
@@ -271,8 +272,12 @@ if (isset($_POST['submit'])) {
                   <input type="text" class="form-control" id="address" name="address" placeholder="Your Restaurant's Address" required="">
                 </div>
 
-                <label class="text-danger mb-3"><span> <?php echo $error;  ?> </span></label>
+                <div class="input-group mb-3">
+                  <label class="input-group-text" for="image"><span class="bi-camera-fill"></span></label>
+                  <input type="file" class="form-control" id="image" name="image">
+                </div>
 
+                <label class="text-danger mb-3"><span> <?php echo $error;  ?> </span></label>
                 <div class="form-group mb-3">
                   <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right"> ADD RESTAURANT </button>
                 </div>

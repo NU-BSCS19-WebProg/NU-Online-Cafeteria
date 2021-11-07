@@ -23,17 +23,23 @@ if (isset($_POST['submit'])) {
 
   if ($_FILES['image']['name'] == "") { //if image is left unchanged
     $target_file = $_POST['old_image'];
-    $query = mysqli_query($conn, "UPDATE food set name='$name', price='$price', calories='$calories', allergens='$allergens', description='$description', images_path='$target_file' where F_ID='$F_ID'");
-    $query = "DELETE FROM weekly_items WHERE F_ID = '$F_ID'";
-    $conn->query($query);
-    if (!empty($_POST['week'])) {
-      foreach ($_POST['week'] as $id) {
-        //saving into weekly items table
-        $query = "INSERT INTO weekly_items (day_id, F_ID) VALUES ($id, $F_ID)";
-        $success = $conn->query($query);
+    $query = "UPDATE food set name='$name', price='$price', calories='$calories', allergens='$allergens', description='$description', images_path='$target_file' where F_ID='$F_ID'";
+    $result = $conn->query($query);
+
+    if (!$result) {
+      $error = ("Couldnt enter data: " . $conn->error);
+    } else {
+      $query = "DELETE FROM weekly_items WHERE F_ID = '$F_ID'";
+      $conn->query($query);
+      if (!empty($_POST['week'])) {
+        foreach ($_POST['week'] as $id) {
+          //saving into weekly items table
+          $query = "INSERT INTO weekly_items (day_id, F_ID) VALUES ($id, $F_ID)";
+          $success = $conn->query($query);
+        }
       }
+      $response = "success";
     }
-    $response = "success";
   } else {
     $target_file = $target_dir . basename($_FILES["image"]["name"]);
     // Check if image file is a actual image or fake image
@@ -47,17 +53,22 @@ if (isset($_POST['submit'])) {
     // Check if $uploadOk is set to 0 by an error
     if ($uploadOk !== 0) {
       if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-        $query = mysqli_query($conn, "UPDATE food set name='$name', price='$price', calories='$calories', allergens='$allergens', description='$description', images_path='$target_file' where F_ID='$F_ID'");
-        $query = "DELETE FROM weekly_items WHERE F_ID = '$F_ID'";
-        $conn->query($query);
-        if (!empty($_POST['week'])) {
-          foreach ($_POST['week'] as $id) {
-            //saving into weekly items table
-            $query = "INSERT INTO weekly_items (day_id, F_ID) VALUES ($id, $F_ID)";
-            $success = $conn->query($query);
+        $query = "UPDATE food set name='$name', price='$price', calories='$calories', allergens='$allergens', description='$description', images_path='$target_file' where F_ID='$F_ID'";
+        $result = $conn->query($query);
+        if (!$result) {
+          $error = ("Couldnt enter data: " . $conn->error);
+        } else {
+          $query = "DELETE FROM weekly_items WHERE F_ID = '$F_ID'";
+          $conn->query($query);
+          if (!empty($_POST['week'])) {
+            foreach ($_POST['week'] as $id) {
+              //saving into weekly items table
+              $query = "INSERT INTO weekly_items (day_id, F_ID) VALUES ($id, $F_ID)";
+              $success = $conn->query($query);
+            }
           }
+          $response = "success";
         }
-        $response = "success";
       } else {
         $error = "Sorry, there was an error uploading your image.";
       }
@@ -123,7 +134,7 @@ if (isset($_POST['submit'])) {
                 <br style="clear: both">
                 <h3 class="text-center">EDIT FOOD ITEM</h3>
                 <label class="text-danger mb-3"><span> <?php echo $error; ?> </span></label>
-                
+
                 <div class="row">
                   <div class="col-6">
                     <div class="form-group mb-3">
@@ -152,7 +163,7 @@ if (isset($_POST['submit'])) {
 
                     <div class="form-group mb-3">
                       <label for="dprice">Food Price: </label>
-                      <input type="number" class="form-control" id="dprice" name="dprice" value=<?php echo $row1['price'];  ?> placeholder="Your Food Price (INR)" required="">
+                      <input type="number" min="0" class="form-control" id="dprice" name="dprice" value=<?php echo $row1['price'];  ?> placeholder="Your Food Price (INR)" required="">
                     </div>
 
                     <div class="form-group mb-3">
@@ -162,7 +173,7 @@ if (isset($_POST['submit'])) {
 
                     <div class="form-group mb-3">
                       <label for="dcalories">Food Calories: </label>
-                      <input type="number" class="form-control" id="dcalories" name="dcalories" value=<?php echo $row1['calories'];  ?> placeholder="Calories" required="">
+                      <input type="number" min="0" class="form-control" id="dcalories" name="dcalories" value=<?php echo $row1['calories'];  ?> placeholder="Calories" required="">
                     </div>
 
                     <div class="form-group mb-3">
