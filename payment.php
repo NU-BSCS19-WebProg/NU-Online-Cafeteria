@@ -11,6 +11,7 @@ if (!isset($_SESSION['login_user2'])) {
 }
 
 $response = "";
+$error = "";
 
 $query = "SELECT SUM(price * quantity) FROM order_items WHERE O_ID = " . getUserOrderID();
 $result = $conn->query($query);
@@ -20,10 +21,14 @@ else
   echo 'something went wrong';
 
 if (isset($_POST["checkout"])) {
-  $o_id =  getUserOrderID(); //save before it gets lost
-  $query = "UPDATE orders SET paid = 1, total_price = $gtotal, date_placed = CURRENT_TIMESTAMP WHERE O_ID = $o_id";
-  mysqli_query($conn, $query);
-  $response = "success";
+  if (is_numeric($_POST["phone"])) {
+    $o_id =  getUserOrderID(); //save before it gets lost
+    $query = "UPDATE orders SET paid = 1, total_price = $gtotal, date_placed = CURRENT_TIMESTAMP WHERE O_ID = $o_id";
+    mysqli_query($conn, $query);
+    $response = "success";
+  } else {
+    $error = "Enter a valid number."; 
+  }
 }
 
 ?>
@@ -45,7 +50,7 @@ if (isset($_POST["checkout"])) {
         <div class="modal-body">
           <h5><span class="bi-ok-circle"></span> Order Placed Successfully.</h5>
           <p class="card-text">Thank you for Ordering at <?= $website_name ?>! The ordering process is now complete.</p>
-          <strong>Your Order Number: <span class="text-success"><?php echo $o_id?></span></strong>
+          <strong>Your Order Number: <span class="text-success"><?php echo $o_id ?></span></strong>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-success"><a href="index.php">Okay</a></button>
@@ -69,7 +74,9 @@ if (isset($_POST["checkout"])) {
             <label class="radio btn btn-outline-primary border" for="paymaya"><img src="images/paymaya.png" alt="logo" class="rounded me-2"> Paymaya E-Wallet</label>
 
             <label for="exampleFormControlInput1" class="form-label mt-4">Enter e-wallet number:</label>
-            <input type="tel" class="form-control" id="phone" required>
+            <input type="tel" class="form-control" name="phone" id="phone" required>
+
+            <label class="text-danger"><span> <?php echo $error; ?> </span></label> <br>
 
             <input type="submit" name="checkout" class="btn btn-success mt-4" value="PAY AND PLACE ORDER NOW">
           </form>
