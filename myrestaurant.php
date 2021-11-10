@@ -274,7 +274,7 @@ if (isset($_POST['submit'])) {
 
                 <div class="input-group mb-3">
                   <label class="input-group-text" for="image"><span class="bi-camera-fill"></span></label>
-                  <input type="file" class="form-control" id="image" name="image">
+                  <input type="file" class="form-control" id="image" name="image" required="">
                 </div>
 
                 <label class="text-danger mb-3"><span> <?php echo $error;  ?> </span></label>
