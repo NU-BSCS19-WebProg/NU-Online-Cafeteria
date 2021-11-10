@@ -17,21 +17,22 @@ include("common/components.php");
     <main>
         <div class="container">
             <h1>Past Orders</h1>
-            <div class="row">
-                <table class="table table-bordered table-sm">
-                    <thead>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Items</th>
-                            <th>Total Price</th>
-                            <th>Date Placed</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $query = "SELECT * FROM orders  WHERE username = '$login_session' AND paid = 1";
-                        $result = $conn->query($query);
-                        if ($result && mysqli_num_rows($result) > 0) {
+            <?php
+            $query = "SELECT * FROM orders  WHERE username = '$login_session' AND paid = 1";
+            $result = $conn->query($query);
+            if ($result && mysqli_num_rows($result) > 0) { ?>
+                <div class="row">
+                    <table class="table table-bordered table-sm">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Items</th>
+                                <th>Total Price</th>
+                                <th>Date Placed</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
                             while ($row = mysqli_fetch_assoc($result)) { ?>
                                 <tr>
                                     <td><strong><?php echo $row['O_ID'] ?></strong></td>
@@ -43,8 +44,7 @@ include("common/components.php");
                                             $result2 = $conn->query($query2);
                                             if ($result2 && mysqli_num_rows($result2) > 0) {
                                                 while ($row2 = mysqli_fetch_assoc($result2)) {
-                                                    //echo '<tr><td>' .$row2['foodname'] . ' (' . $row2['quantity'] . ')' . '</td></tr>';
-                                                   echo '<li>' . $row2['foodname'] . ' (' . $row2['quantity'] . ')' . '</li>';
+                                                    echo '<li>' . $row2['foodname'] . ' (' . $row2['quantity'] . ')' . '</li>';
                                                 }
                                             }
                                             ?>
@@ -56,13 +56,13 @@ include("common/components.php");
 
 
                             <?php } ?>
-                    </tbody>
-                </table>
-            <?php } else {
-                            echo '<h5>You have no past orders</h5>';
-                        }
-            ?>
-            </div>
+                        </tbody>
+                    </table>
+                <?php } else {
+                echo '<h5>You have no past orders</h5>';
+            }
+                ?>
+                </div>
         </div>
     </main>
 
