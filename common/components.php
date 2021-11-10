@@ -34,7 +34,7 @@ function navbar($page)
   if (isset($_SESSION['login_user1'])) { //if admin
     echo '
             <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a href="#" class="nav-link"><span class="bi-person-fill"></span> Welcome ';
+            <li class="nav-item"><a class="nav-link admin-name"><span class="bi-person-fill"></span> Welcome ';
     echo $_SESSION['login_user1'];
     echo '
             </a></li>
@@ -59,12 +59,6 @@ function navbar($page)
     if ($page === "cart") echo ' active';
     echo '"><span class="bi-cart-fill"></span> Cart (';
     echo getCartCount();
-
-    // if (isset($_SESSION["cart"])) {
-    //   $count = count($_SESSION["cart"]);
-    //   echo "$count";
-    // } else
-    //   echo "0";
     echo ')
             </a></li>
         <li class="nav-item"><a href="utils/logout_u.php" class="nav-link"><span class="bi-box-arrow-left"></span> Log Out </a></li>
