@@ -129,11 +129,7 @@ $response = "";
 
   <main>
     <?php
-    if (getCartCount() !== 0) {
-      // $O_ID = getUserOrderID();
-      // $query = "SELECT a.order_item_ID, a.quantity, b.item_name, b.price FROM order_items a, food_items b WHERE a.O_ID = $O_ID AND a.item_id = b.id";
-      // $result = mysqli_query($conn, $query);
-    ?>
+    if (getCartCount() !== 0) { ?>
       <div class="container">
         <div class="row">
           <div class="col-lg-10 col-md-12">
@@ -153,7 +149,7 @@ $response = "";
               <?php
               $total = 0;
               $query = "SELECT a.order_item_ID, a.quantity, b.F_ID, b.name, a.price, b.images_path FROM order_items a, food b WHERE a.F_ID = b.F_ID AND O_ID = " . getUserOrderID();
-              $result = $conn->query($query); 
+              $result = $conn->query($query);
               if ($result && mysqli_num_rows($result) > 0) {
                 while ($values = mysqli_fetch_assoc($result)) {
               ?>
