@@ -1,5 +1,6 @@
 <?php
 
+// button that takes page to top component
 function toTopBtn()
 {
   echo '
@@ -8,6 +9,7 @@ function toTopBtn()
     </button>';
 }
 
+// navbar component
 function navbar($page)
 {
   include("website_info.php");
@@ -95,6 +97,7 @@ function navbar($page)
     </nav>';
 }
 
+// footer component
 function footer()
 {
   include("website_info.php");
@@ -121,6 +124,7 @@ function footer()
 </footer>';
 }
 
+// admin sidebar component for admin-related pages
 function adminSideBar($page)
 {
   echo '<div class="text-start">
