@@ -1,5 +1,6 @@
 <?php
 
+// template for the head of the html document
 function head($title)
 {
     include("website_info.php");
@@ -19,7 +20,7 @@ function head($title)
 EOT;
 }
 
-
+// template for the scripts at the end of html document body
 function scripts()
 {
     echo '
